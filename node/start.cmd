@@ -1,0 +1,1 @@
+@node "C:\Users\zmz\Desktop\myProjects\node\nodeMain.js" %*
