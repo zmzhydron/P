@@ -2,7 +2,6 @@ function Promise(fn){
 
 	var status = 0;
 	var thenArray = [];
-	var cb;
 	var value = void 0;
 
 	function handle(obj){
@@ -19,7 +18,6 @@ function Promise(fn){
 		}
 	}
 	this.then = function(onSuccess,onReject){
-		cb = onSuccess;
 		return new Promise(function(resolve){
 			handle({
 				cb:onSuccess,
