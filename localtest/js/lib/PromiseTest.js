@@ -38,7 +38,6 @@ function Promise(fn){
 					thenArray[s].resolve(ret);
 				}
 			}
-			status = 0;
 		}
 	}
 
