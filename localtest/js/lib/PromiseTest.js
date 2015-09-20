@@ -1,25 +1,55 @@
 function Promise(fn){
-	var status = 'unfinish';
+
+	var status = 0;
 	var thenArray = [];
+	var cb;
 	var value = void 0;
-	this.then = function(onSuccess,onReject){
-		if(status !== 'unfinish'){
-			onSuccess(value);
-			return;
+
+	function handle(obj){
+		var ret;
+		
+		if(status === 1){
+			if(typeof cb === 'function'){
+				ret = obj.cb(value);
+				console.log(ret);
+				obj.resolve(ret);
+			}
+		}else{
+			thenArray.push(obj);
 		}
-		thenArray.push(onSuccess);
+	}
+	this.then = function(onSuccess,onReject){
+		cb = onSuccess;
+		return new Promise(function(resolve){
+			handle({
+				cb:onSuccess,
+				resolve:resolve
+			})
+		})
 	}
 	function resolve(val){
-		setTimeout(function(){
-			status = 'finish';
+		console.log('resolve');
+		if(val === undefined) return;
+		if(status === 0){
+			status = 1;
 			value = val;
+			console.log(thenArray);
 			for(var s = 0,len = thenArray.length;s<len;s++){
-				thenArray[s](val);
+				var ret = thenArray[s].cb(val);
+				if(thenArray[s].resolve && ret !== undefined){
+					thenArray[s].resolve(ret);
+				}
 			}
-		},0);
-
+			status = 0;
+		}
 	}
-	fn(resolve);
+
+	if(typeof fn === 'function'){
+		fn(resolve)
+	}else{
+		resolve(fn);
+	}
+	
 }
 function Test(){
 	return new Promise(function(resolve){
@@ -29,7 +59,16 @@ function Test(){
 	})
 }
 Test().then(function(val){
-	console.log('hi'+val);
-}).then(function(){
-
-});
+	console.log('hi~~'+val);
+	return 'zhangmingzhi';
+}).then(function(asd){
+	console.log('second is ' + asd);
+	return 'zmz';
+}).then(function(val){
+	setTimeout(function(){
+		console.log('fuck you ~~'+val);
+		return 'siwa';
+	},1000);
+}).then(function(val){
+	console.log('this is a delay then callback: '+val);
+})

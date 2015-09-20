@@ -7,6 +7,42 @@
 	<style type="text/css"></style>
 </head>
 <body>
-	<div id="aa">promise THEN 方法参数的成功方法的入参必须由resolve传入。</div>
+	<div id="aa">
+		<h1>Promise关键点</h1>
+		<h2>总体：</h2>
+		
+		<H4>Promise初始化的时候传入一个回调函数作为其开始方法：</H4>
+		<pre>
+	return new Promise(function(resolve){
+		setTimeout(function(){
+			resolve('zhangmingzhi')
+		},2000);
+	})
+		</pre>
+		<p>回调方法的参数resolve为解决方法，这个resolve是唯一能够改变Promise状态的地方。如下代码所示：</p>
+	<pre>
+	function resolve(val){
+		if(val === undefined) return;
+		if(status === 0){
+			status = 1;
+			//执行then的回调函数，并传入给resolve的参数；
+			then.onSuccess(val);
+			status = 0;
+		}
+	}
+	</pre>
+		<p>2：then方法传入的成功回调，失败回调是必须在resolve后才能进行的，其参数就是调用resolve传入的参数</p>
+		<h3>Promise的链式回调</h3>
+		<h4>链式回调有几个关键点：</h4>
+		<ul>
+			<li>1：then方法必须返回一个promise实例。</li>
+			<li>2：下一个then方法成功、失败的回调函数的参数必须是这个then方法的回调函数的返回值。</li>
+		</ul>	
+		<p>链式回调的方法有很多，这里使用一个比较简单的方式，采用闭包的方法<i>思路就是当第一个promise被resolve掉，执行了then的成功回调。</i></p>
+		<p><i>当第一个then的回调执行成功后，就说明第一步异步执行的方法成功了， 返回了值了，那么就可以把执行第2步的then方法的回调了。</i></p>
+		<p><i>我们知道then回调执行的前提是这个promise实例中的resolve方法执行成功才能调用then的回调，</i></p>
+		<p><i>那么在第一步的then回调执行成功后我们就执行第2个promise实例的revolve方法通知其可以执行then的回调函数了。</i></p>
+		<p><i>第2步then的回调函数的参数来至第一步then回调函数的返回值</i></p>
+	</div>
 </body>
 </html>
