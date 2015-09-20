@@ -6,9 +6,8 @@ function Promise(fn){
 
 	function handle(obj){
 		var ret;
-		
 		if(status === 1){
-			if(typeof cb === 'function'){
+			if(typeof obj.cb === 'function'){
 				ret = obj.cb(value);
 				console.log(ret);
 				obj.resolve(ret);
@@ -31,12 +30,8 @@ function Promise(fn){
 		if(status === 0){
 			status = 1;
 			value = val;
-			console.log(thenArray);
 			for(var s = 0,len = thenArray.length;s<len;s++){
-				var ret = thenArray[s].cb(val);
-				if(thenArray[s].resolve && ret !== undefined){
-					thenArray[s].resolve(ret);
-				}
+				handle(thenArray[s]);
 			}
 		}
 	}
@@ -66,6 +61,7 @@ Test().then(function(val){
 		console.log('fuck you ~~'+val);
 		return 'siwa';
 	},1000);
+	return 'heisi';
 }).then(function(val){
 	console.log('this is a delay then callback: '+val);
 })
