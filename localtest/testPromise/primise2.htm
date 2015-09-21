@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="charset=UTF-8"/> 
+	<title></title>
+	<script type="text/javascript">
+		function Promise(fn){
+			var pendings = [],state = 0,value;
+			this.then = function(onSuccess){
+				return new Promise(function(resolve){
+					handle({
+						success:onSuccess,
+						resolve:resolve
+					})
+				})
+			}
+			function handle(handles){
+				if(state === 1){
+					var ret = handles.success(value);
+					handles.resolve(ret);
+				}else{
+					pendings.push(handles);
+				}
+			}
+			function resolve(val){
+				if(val && val instanceof Promise && val.then === 'function'){
+					var then = val.then;
+					then.call(val,resolve);
+					return;
+				}else{
+					value = val;
+					if(state === 0){
+						state = 1;
+						for(var s = 0,ss = pendings.length;s<ss;s++){
+							handle(pendings[s]);
+						}
+					}
+				}
+
+			}
+			fn(resolve);
+		}
+		function One(){
+			return new Promise(function(resolve){
+				setTimeout(function(){
+					resolve('zhangmingzhi');
+				},2000);
+			});
+		}
+		One().then(function(val){
+			return new Promise(function(resolve){
+				setTimeout(function(){
+					console.log('Stage Two~~ @ '+val);
+					resolve(val + 'zmz');
+				},1000);
+			})
+		}).then(function(val){
+			return new Promise(function(resolve){
+				console.log(val);
+				resolve(val);
+				return 'me';
+			})
+		})
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
