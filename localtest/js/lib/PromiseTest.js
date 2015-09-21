@@ -1,3 +1,4 @@
+
 function Promise(fn){
 
 	var status = 0;
@@ -65,3 +66,4 @@ Test().then(function(val){
 }).then(function(val){
 	console.log('this is a delay then callback: '+val);
 })
+
