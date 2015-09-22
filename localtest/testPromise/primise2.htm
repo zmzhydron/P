@@ -23,7 +23,7 @@
 				}
 			}
 			function resolve(val){
-				if(val && val instanceof Promise && val.then === 'function'){
+				if(val && val.then === 'function'){
 					var then = val.then;
 					then.call(val,resolve);
 					return;
@@ -54,13 +54,14 @@
 					resolve(val + 'zmz');
 				},1000);
 			})
-		}).then(function(val){
-			return new Promise(function(resolve){
-				console.log(val);
-				resolve(val);
-				return 'me';
-			})
 		})
+		// .then(function(val){
+		// 	return new Promise(function(resolve){
+		// 		console.log(val);
+		// 		resolve(val);
+		// 		return 'me';
+		// 	})
+		// })
 	</script>
 </head>
 <body>
