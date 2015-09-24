@@ -5,7 +5,7 @@
 	<title></title>
 	<script type="text/javascript">
 		function Promise(fn){
-			var pendings = [],state = 0,value;
+			var pendings = [], stauts = 0, value;
 			this.then = function(onSuccess){
 				return new Promise(function(resolve){
 					handle({
@@ -14,29 +14,28 @@
 					})
 				})
 			}
-			function handle(handles){
-				if(state === 1){
-					var ret = handles.success(value);
-					handles.resolve(ret);
-				}else{
-					pendings.push(handles);
+			function handle(pending){
+				if(stauts === 0){
+					pendings.push(pending);
+					return;
 				}
+				var ret = pending.success(value);
+				pending.resolve(ret);
 			}
 			function resolve(val){
-				if(val && val.then === 'function'){
+				if(val && typeof val.then === 'function'){
+
 					var then = val.then;
 					then.call(val,resolve);
 					return;
-				}else{
-					value = val;
-					if(state === 0){
-						state = 1;
-						for(var s = 0,ss = pendings.length;s<ss;s++){
-							handle(pendings[s]);
-						}
-					}
 				}
-
+				value = val;
+				stauts = 1;
+				setTimeout(function(){
+					for(var s =0;s<pendings.length;s++){
+						handle(pendings[s]);
+					}
+				},0)
 			}
 			fn(resolve);
 		}
@@ -50,21 +49,52 @@
 		One().then(function(val){
 			return new Promise(function(resolve){
 				setTimeout(function(){
-					console.log('Stage Two~~ @ '+val);
-					resolve(val + 'zmz');
+					alert(val);
+					resolve(val + ' 1');
 				},1000);
 			})
 		})
-		// .then(function(val){
-		// 	return new Promise(function(resolve){
-		// 		console.log(val);
-		// 		resolve(val);
-		// 		return 'me';
-		// 	})
-		// })
+
+		.then(function(val){
+			return new Promise(function(resolve){
+				alert(val)
+				resolve(val + ' 2');
+				
+			})
+		})
+		.then(function(val){
+			return new Promise(function(resolve){
+				setTimeout(function(){
+					alert(val);
+					resolve(val + ' 3');
+				},2000)
+			})
+		})
 	</script>
 </head>
 <body>
-	
+	<div>
+		<p>通过传入成功回调返回的promise对象给下一个promise的then方法的resolve方法做参数相当于2次调用该revolve方法，并构造成功回调返回的promise对象的then方法</p>
+		<pre>
+		var ret = pending.success(value);
+		pending.resolve(ret); //ret 为success方法返回的promise对象。
+		function resolve(val){
+			if(val && typeof val.then === 'function'){
+
+				var then = val.then;
+				then.call(val,resolve); //success方法返回的promise对象，构造其then方法，让其调用当前的promise方法的resolve方法，传入其异步值，将值传递给当前的then方法的回调
+				return;
+			}
+			value = val;
+			stauts = 1;
+			setTimeout(function(){
+				for(var s =0;s&ltpendings.length;s++){
+					handle(pendings[s]);
+				}
+			},0)
+		}
+		</pre>
+
+	</div>	
 </body>
 </html>
