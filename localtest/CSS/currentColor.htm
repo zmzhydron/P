@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>currentColor</title>
+	<meta http-equiv="Content-Type" content="charset=UTF-8">
+	<style type="text/css">
+		#a{
+			color: green;
+			font-size: 72px;
+		}
+		#b{
+			/*color:currentColor;*/
+			display: block;
+			background: silver;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+		#a:hover{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<p>
+		currentColor使用方法为：
+	</p>	
+	<pre>
+#me{
+	border:solid 1px currentColor;
+	background:currentColor;
+	box-shadow:0 0 2px 20px currentColor;
+}
+	</pre>
+	<p>
+		注意到本来该填写color的位置我们用了一个currentColor，这个的意思就是颜色继承自父级的颜色。
+	</p>
+	<p>
+		用处：子元素如果要跟随父级进行变动的话不在需要在自己的css标识符加上如active之类的标志，再在写代码了，还有其他的例子等。直接一个currentColor即可
+	</p>
+	<h2>例子：</h2>
+	<p id='a'>
+		移动到我上面会变色~~~
+		<span id='b'>我使用了currentColor</span>
+	</p>
+</body>
+</html>

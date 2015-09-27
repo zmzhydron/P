@@ -21,17 +21,18 @@ function Promise(fn){
 		
 	}
 	function resolve(val){
-		console.log(val,1111111111);
+		console.log(status,"RRRRRRRRRRRRRR");
 		if(status === 0){
 			status = 1;	
-			
 			if(val && typeof val.then === 'function'){
 				var then = val.then;
 				then.call(val,resolve);
 				return;
 			}
 			value = val;
-			handle(pendings[0]);
+			for(var s = 0;s<pendings.length;s++){
+				handle(pendings[s]);
+			}
 		}
 	}
 	fn(resolve);
@@ -45,14 +46,14 @@ function test(){
 	});
 }
 test().then(function(val){
-	// return new Promise(function(resolve){
-	// 	setTimeout(function(){
-	// 		console.log("stage two of many @ "+ val);
-	// 		resolve(val + "11111111111");
-	// 	},1000)
-	// });
-	console.log(val);
-	return 'zmz';
+	return new Promise(function(resolve){
+		setTimeout(function(){
+			alert("stage two of many @ "+ val);
+			resolve(val + "11111111111");
+		},1000)
+	});
+	// alert(val);
+	// return '1';
 })
 .then(function(val){
 	alert(val);

@@ -9,7 +9,7 @@ var count = 0;
 
 	*/ 
 	var myapp = require('./app');
-	
+	myapp.start();
 	var server = http.createServer(function (req, res) { 
 		/*
 			A01
@@ -75,7 +75,7 @@ var count = 0;
 		};
 		// rep.writeHead(200,{'Content-Type':'text/plain'});
 		// // rep.write(str);
-		// myapp.start(rep);
+		
 		// setTimeout(function(){
 		// 	rep.end();
 		// },10)

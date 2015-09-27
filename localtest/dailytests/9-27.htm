@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>javascript-Call</title>
+	<meta http-equiv="Content-Type" content="charset=UTF-8"/>
+	<script type="text/javascript">
+		var a = {
+			name:'zhangmingzhi',
+			say:function(val){
+				console.log(val || this.name);
+			}
+		}
+		var b  ={
+			name:'zmz'
+		}
+		function asd(){
+			this.name = 'fuck you ~~';
+		}
+		a.say.call(asd);
+	</script>
+</head>
+<body>
+<p>测试call方法在传入第一个参数为普通的function的时候的作用。</p>
+</body>
+</html>
