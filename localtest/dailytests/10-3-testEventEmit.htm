@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>测试自己的eventemit JS</title>
+	<meta http-equiv="content-type" content="charset=UTF8">
+	<script type="text/javascript" src='../js/lib/eventEmit.js'></script>
+	<script type="text/javascript">
+		function a(){
+			var me = 'zhangmingzhi';
+			EventEmit.reg("GO",function(){
+				console.log(me);
+			})
+		}
+		function b(){
+			var me = 'zmz';
+			EventEmit.reg("GO",function(){
+				console.log(me);
+			})
+		}
+		a();
+		b();
+		console.log(EventEmit);
+		EventEmit.emit("GO");
+	</script>
+</head>
+<body>
+</body>
+</html>

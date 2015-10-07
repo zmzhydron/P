@@ -6,19 +6,58 @@
 		var a = {
 			name:'zhangmingzhi',
 			say:function(val){
-				console.log(val || this.name);
+				console.log(this);
+				console.log(this.name);
+				val && val();
 			}
 		}
 		var b  ={
 			name:'zmz'
 		}
-		function asd(){
+		function asd111(){
 			this.name = 'fuck you ~~';
 		}
-		a.say.call(asd);
+		function bb(){
+			var me = 'oops';
+			var cc = function(){
+				console.log(me);
+			}
+			return cc;
+		}
+		var c = bb();
+		function aa(){
+
+		}
+		var test = new Function('var name = "zhangmingzhi1111111111111"; alert(name)' );
+		var testaa = function abc(){};
+		test();
+		function hehe(ab){
+			ab();
+		}
+		hehe(function asd(){
+			alert('123');
+		})
+		a.say.call(test);
+		function(val){alert(val)}(111111111)
 	</script>
 </head>
 <body>
 <p>测试call方法在传入第一个参数为普通的function的时候的作用。</p>
+<p>当函数为函数声明的时候如下：</p>
+<pre>
+function hehe(){}
+</pre>
+<p>他被当作一个对象，其name属性的值就是方法值</p>
+<p>当为函数表达式如下：</p>
+<pre>
+var me = function(){};
+var me = new Function(){};
+</pre>
+<p>他作为匿名方法来作用的，没有对象的概念了,但是有一个方法出来，这就是:</p>
+<pre>
+var me = function asd(){};
+
+</pre>
+<p>他的行为和函数声明一样，但是没有变量提升的概念了。</p>
 </body>
 </html>

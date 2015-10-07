@@ -27,6 +27,22 @@
 
 					var then = val.then;
 					then.call(val,resolve);
+					/*
+						1：promise链式调用：通过then方法调用返回一个新的promise对象。
+						2: then的success回调方法会返回一个promise对象，这个对象没有then方法，需要其他地方为其注册then方法和设置then方法的success回调函数。（主要作用于异步方法）；
+						3：当1中的promise对象的resolve后，promise调用当前的handle方法中注册的resolve方法和success方法。handle方法中的resolve是then方法执行返回的resolve，也就是
+						   下一个promise的resolve，success为当前then方法的success,当当前promise对象被resolve后，会调用handle方法（这时候handle方法已经作为then方法执行后所返回的promise
+						   对象的回调函数执行了，所以当前的pendings也就会存储传给handle的下个promise的resolve和success)，当handle方法判断当前promise被resolve后，会按步执行success回调，
+						   并把回调的返回值（一个promise）传递给下个promise的resolve方法。下个promise被resolve后也会执行下个promise中的handle方法（这个handle方法包含了下个promise的success
+						   回调和下下个promise的resolve）那么就形成了链式调用，注意（handle方法和每个promise的pendings数组中的内容是在链式调用一瞬间形成的，只是需要resolve来触发传递值）
+						4：1、2、3步形成了同步状态下的链式调用，把这个then success方法的值传递给下个then方法的success，当为异步的时候就不行，我们要通过一个方式来通知下个then的success来
+						   说：当前promise已经异步执行完成了，我们需要把这个值传递到下个promise了。
+						5：目前思路：通过在success执行返回一个promise对象，这个promise对象有他的回调函数，函数的参数为这个promise的resolve方法和普通的promise对象创建一致（这个promise没有then方法）；再把这个返回的promise作为参数传递给下个promise的resolve方法，这时候，通过resolve方法来注册
+						   success返回promise的then方法，（这时候then方法会返回一个promise    PS:（TODO:我也不清楚怎么理解））注册的then方法通过call的方式将作用于定在了success返回的promise上，PS:(我认为是为了调用其then方法让其success赋值为当前promise的resolve，
+						   resolve赋值为新promise的resolve（我认为revolve已经不重要了）)。
+						   传入参数为当前promise的resolve方法，我们知道resolve方法的参数为异步的最终值，也就是传递给success的值。所以当3中的success方法执行后，success返回的promise对象的回调函数执行完毕，resolve方法（success返回的promise对象）执行完毕后调用（success返回的promise对象的then方法的）success函数（也就是3中的resolve方法），参数为异步完成的值，那么
+						   resolve方法判断为不是promise对象，执行handle方法中的success（就为3中的success），然后将success中的promise继续传递给下一个resolve也就是3中的下个then方法的resolve。
+					*/
 					return;
 				}
 				value = val;
