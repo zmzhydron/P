@@ -6,6 +6,7 @@
 	<script type="text/javascript">
 		function Promise(fn){
 			var pendings = [], stauts = 0, value;
+			count = 0;
 			this.then = function(onSuccess){
 				return new Promise(function(resolve){
 					handle({
@@ -23,8 +24,10 @@
 				pending.resolve(ret);
 			}
 			function resolve(val){
+				count++;
+				console.log(count,"@@@@@@@@@")
 				if(val && typeof val.then === 'function'){
-
+					
 					var then = val.then;
 					then.call(val,resolve);
 					/*
@@ -65,27 +68,30 @@
 		One().then(function(val){
 			return new Promise(function(resolve){
 				setTimeout(function(){
-					alert(val);
+					
 					resolve(val + ' 1');
+					console.log(val);
 				},1000);
 			})
 		})
 
 		.then(function(val){
 			return new Promise(function(resolve){
-				alert(val)
+				
 				resolve(val + ' 2');
+				console.log(val)
 				
 			})
 		})
-		.then(function(val){
-			return new Promise(function(resolve){
-				setTimeout(function(){
-					alert(val);
-					resolve(val + ' 3');
-				},2000)
-			})
-		})
+		// .then(function(val){
+		// 	return new Promise(function(resolve){
+		// 		setTimeout(function(){
+					
+		// 			resolve(val + ' 3');
+		// 			console.log(val);
+		// 		},2000)
+		// 	})
+		// })
 	</script>
 </head>
 <body>
