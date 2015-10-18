@@ -8,8 +8,18 @@ var count = 0;
 		app.js
 
 	*/ 
+	var hehe = require('hehe');
+	var aaa = new hehe.hehe();
+	aaa.say();
 	var myapp = require('./app');
 	myapp.start();
+/*
+
+	express app;	
+*/
+	var exp = require('express');
+	
+
 	var server = http.createServer(function (req, res) { 
 		/*
 			A01
@@ -79,12 +89,14 @@ var count = 0;
 					}else{
 						console.log("success~~~");
 						res.writeHead(200,{'Content-Type':'text/html'});
-						res.write(file,'binary');
+						// res.write(file,'binary');
+						res.write(hehe.str);
 						res.end();
 					}
 				});
 			}
 		});
+		//C:\Users\Administrator\Desktop\node;C:\Users\Administrator\AppData\Roaming\npm
 		/*
 			A01结束;
 		*/
@@ -101,7 +113,7 @@ var count = 0;
 		});
 		count++;
 		console.log("********************************************************")
-		console.log(count);
+		console.log(count," haha");
 		console.log("********************************************************")
 	});
 	server.listen("8888","127.0.0.1");

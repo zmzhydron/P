@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv='Content-type' content='charset=UTF-8'>
+	<title></title>
+	<style type="text/css">
+		#a{
+			height: 50px;
+			line-height: 50px;
+			font-size: 50px;
+			color: green;
+			width:auto;
+			top: 100px;
+			left:100px;
+			-webkit-animation:'shake' 100ms linear 0s infinite normal;
+		}
+		#a:hover{
+			animation-play-state:paused;
+		}
+		@-webkit-keyframes shake{
+			0%{ margin-left:-5px;}
+			25%{margin-left:0px;}
+			50%{margin-left:5px;}
+			75%{margin-left:0px;}
+			100%{margin-left:-5px;}
+		}
+
+	</style>
+	<script type="text/javascript">
+
+	</script>
+</head>
+<body>
+	<img src="../image/animation_pro.png" alt="123123">
+	<div id="a">shake BABY BABYSHAKE</div>
+	<pre>			
+-webkit-animation-name:shake;/*动画属性名，也就是我们前面keyframes定义的动画名*/
+
+-webkit-animation-duration:100ms;/*动画持续时间*/
+
+-webkit-animation-timing-function: ease-in-out; /*动画频率，和transition-timing-function是一样的*/
+
+/*
+	animation-delay:是用来指定元素动画开始时间。取值为<time>为数值，单位为s(秒)，其默认值也是0。这个属性和transition-delayy使用方法是一样的。
+*/
+-webkit-animation-delay: 0s;/*动画延迟时间*/
+/*
+	animation-play-state主要是用来控制元素动画的播放状态。其主要有两个值，running和paused其中running为默认值。
+*/
+animation-play-state:running;
+/*
+animation-iteration-count是用来指定元素播放动画的循环次数，其可以取值<number>为数字，其默认值为“1”；infinite为无限次数循环。
+*/
+-webkit-animation-iteration-count: infinite;/*定义循环资料，infinite为无限次*/
+/*
+	animation-direction是用来指定元素动画播放的方向，其只有两个值，默认值为normal，如果设置为normal时，动画的每次循环都是向前播放；另一个值是alternate，他的作用是，动画播放在第偶数次向前播放，第奇数次向反方向播放。
+*/
+-webkit-animation-direction: normal;
+		</pre>
+
+</body>
+</html>

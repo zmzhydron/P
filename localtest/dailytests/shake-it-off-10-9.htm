@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv='Content-type' content='charset=UTF-8'>
+	<title></title>
+	<style type="text/css">
+		#a{
+			position: absolute;
+			height: 50px;
+			line-height: 50px;
+			font-size: 50px;
+			color: green;
+			width:auto;
+			top: 100px;
+			left:100px;
+			-webkit-animation-name:shake;/*动画属性名，也就是我们前面keyframes定义的动画名*/
+			-webkit-animation-duration:100ms;/*动画持续时间*/
+			-webkit-animation-timing-function: ease-in-out; /*动画频率，和transition-timing-function是一样的*/
+			-webkit-animation-delay: 0s;/*动画延迟时间*/
+			-webkit-animation-iteration-count: infinite;/*定义循环资料，infinite为无限次*/
+			-webkit-animation-direction: alternate;/*定义动画方式*/
+		}
+		#a:hover{
+			-webkit-animation-iteration-count:1;
+		}
+		@-webkit-keyframes shake{
+			0%{ margin-left:-5px;}
+			25%{margin-left:0px;}
+			50%{margin-left:5px;}
+			75%{margin-left:0px;}
+			100%{margin-left:-5px;}
+		}
+
+	</style>
+	<script type="text/javascript">
+
+	</script>
+</head>
+<body>
+	<div id="a">shake BABY BABYSHAKE</div>
+</body>
+</html>
