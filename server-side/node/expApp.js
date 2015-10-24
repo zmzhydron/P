@@ -25,8 +25,8 @@
 	/*
 		路由系列
 	*/
-
-
+	//通过Router来通过一个单独的文件来写路由处理；
+	app.use(require('./route'));
 
 	// ‘/’根目录
 	app.get('/',resp); 
