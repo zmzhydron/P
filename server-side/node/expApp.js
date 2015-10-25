@@ -1,8 +1,6 @@
 +function(){
 	var exp = require('express');
 	var app = exp();
-
-
 	/*
 		中间件;
 	*/
@@ -18,7 +16,6 @@
 		console.log('this is middleware');
 		next();
 	})
-
 	/*
 		路由系列
 	*/
