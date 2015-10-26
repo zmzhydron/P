@@ -1,11 +1,19 @@
 	var route = require('express').Router();  //路由子模块；
-	
-	route.use(function(req,res){
-		res.send('im back and jam you monther fucker')
-	});
-	route.get('/jaja',function(req,res){
+
+	var middle = {
+		a:function(req,res,next){
+			console.log("this is middleware AA");
+			next();
+		},
+		b:function(req,res,next){
+			console.log("this is middleware BB");
+			next();
+		}
+	}
+
+	route.use('/jaja',[middle.a,middle.b],function(req,res){
 		res.send(" IAM JAJA FORM STAR WAR XIIII");
-	})
+	});
 
 	// ‘/fuck’访问 127.0.0.1:8888/fuck
 	route.get('/fuck',function(req,res){
