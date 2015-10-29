@@ -1,5 +1,4 @@
 	var route = require('express').Router();  //路由子模块；
-
 	var middle = {
 		a:function(req,res,next){
 			console.log("this is middleware AA");
@@ -8,12 +7,21 @@
 		b:function(req,res,next){
 			console.log("this is middleware BB");
 			next();
-		}
+		},
+		post:function(req,res,next){
+			console.log("this is middleware CC");
+			var name = req.body.name;
+			res.send('my name is : '+JSON.stringify(req.body));
+		},
 	}
 
 	route.use('/jaja',[middle.a,middle.b],function(req,res){
 		res.send(" IAM JAJA FORM STAR WAR XIIII");
 	});
+
+	//resetful post
+
+	route.post('/poster',middle.post);
 
 	// ‘/fuck’访问 127.0.0.1:8888/fuck
 	route.get('/fuck',function(req,res){
