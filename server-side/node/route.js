@@ -11,7 +11,10 @@
 		post:function(req,res,next){
 			console.log("this is middleware CC");
 			var name = req.body.name;
-			res.send('my name is : '+JSON.stringify(req.body));
+			// res.send('my name is : '+JSON.stringify(req.body));
+			console.log('send back ajax request ---------------------------------');
+
+			res.send(req.body);
 		},
 	}
 

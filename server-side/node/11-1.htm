@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title>page 11-1</title>
+	<script type="text/javascript" src='../js/jquery.js'></script>
+</head>
+<body>
+	<h1>this is my first express page;</h1>
+	<button id='bta'>by clicking this button will send a ajax to server</button>
+	<script type="text/javascript">
+		$("#bta").click(function(){
+			$.ajax({
+				url:'127.0.0.1:8888/poster',
+				type:'post',
+				data:{
+					name:"zhangmingzhi",
+					age:'27',
+					sex:'male',
+					profession:"programer"
+				},
+				success:function(data){
+					console.log(data);
+				}
+			})
+		})
+	</script>
+</body>
+
+</html>
