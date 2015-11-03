@@ -9,10 +9,19 @@
 	/*
 		调用静态文件，more detail see http://www.expressjs.com.cn/starter/static-files.html
 	*/
+
 	app.use('/js',exp.static('../resource/javascript'));
 	app.use('/image',exp.static('../resource/image'));
-	app.use('/css',exp.static('../resource/css'));
+	app.use('/csses',exp.static('../resource/css'));
 	app.use(exp.static('../resource/pages'));
+
+	//localtest
+	/*
+		当使用了test作为../../../localtest 路径名称后，可以在所有通过express静态服务器加载的静态代码中实现这个路径（../../localtest);
+	*/
+	app.use('/test',exp.static('../../localtest'));
+	app.use('/image',exp.static('../../localtest/image'));
+
 	/*
 		中间件;
 	*/
