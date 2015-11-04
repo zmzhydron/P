@@ -1,0 +1,10 @@
+#imgbg{
+	background: url('../image/1.jpg');
+	height: 300px;
+	width: 500px;
+	border:solid 1px red;
+}
+img{
+	height: 500px;
+	width: 250px;
+}
