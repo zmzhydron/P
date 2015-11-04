@@ -1,4 +1,9 @@
 	var route = require('express').Router();  //路由子模块；
+	/*
+		mongoDB
+	*/
+	var db = require('./db');
+	
 	var middle = {
 		a:function(req,res,next){
 			console.log("this is middleware AA");
@@ -12,11 +17,20 @@
 			console.log("this is middleware CC");
 			var name = req.body.name;
 			// res.send('my name is : '+JSON.stringify(req.body));
+			db.test(req,res,next,'this is db\'s middleware');
 			console.log('send back ajax request ---------------------------------');
-
-			res.send(req.body);
+			res.send(process.env);
 		},
 	}
+
+	/*
+		中间件;
+	*/
+	//全部请求都会通过这个中间件,注意USE方法传入的参数只有回调函数，没有监听的路径，这说明是全局中间件
+	route.use(function(req,res,next){
+		console.log(" all tranffic must to throut me");
+		next();
+	});
 
 	route.use('/jaja',[middle.a,middle.b],function(req,res){
 		res.send(" IAM JAJA FORM STAR WAR XIIII");
@@ -53,4 +67,7 @@
 		res.send('i am a function array\'s result');
 	}
 	route.get('/fnArray',[N1,N2,N3]);
+
+
+
 	module.exports = route;
