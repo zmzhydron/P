@@ -26,7 +26,7 @@
 	// });
 	var m = {
 		save:function(){
-
+			console.log('11');
 		},
 		createSchema:function(){
 
