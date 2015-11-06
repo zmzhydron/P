@@ -18,6 +18,7 @@
 			var name = req.body.name;
 			// res.send('my name is : '+JSON.stringify(req.body));
 			db.test(req,res,next,'this is db\'s middleware');
+			db.save();
 			console.log('send back ajax request ---------------------------------');
 			res.send(process.env);
 		},
