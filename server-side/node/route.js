@@ -16,11 +16,13 @@
 		post:function(req,res,next){
 			console.log("this is middleware CC");
 			var name = req.body.name;
-			// res.send('my name is : '+JSON.stringify(req.body));
 			db.test(req,res,next,'this is db\'s middleware');
-			db.save();
+			db.save(req.body);
 			console.log('send back ajax request ---------------------------------');
-			res.send(process.env);
+			res.send({
+				retMSG:"success",
+				msg:JSON.stringify(req.body)
+			});
 		},
 	}
 

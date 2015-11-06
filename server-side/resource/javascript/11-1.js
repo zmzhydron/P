@@ -64,6 +64,14 @@ var z = {
 			obj[attr[0]] = attr[1];
 		}
 		console.log(obj);
+		$.ajax({
+			url:'http://127.0.0.1:8888/poster',
+			type:'post',
+			data:obj,
+			success:function(data){
+				alert('success!');
+			}
+		})
 	}
 
 }

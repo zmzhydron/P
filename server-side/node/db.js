@@ -13,12 +13,16 @@
 	var personSchema = new Schema({
 		name:String,
 		age:Number,
-		title:String
+		address:String,
+		profession:String,
+		phone:Number,
+		income:Number,
+		relationstatus:String
 	});
 	var personModel = mongo.model('personModel',personSchema,'person');
 
 	var m = {
-		save:function(){
+		save:function(obj){
 			//model
 			
 			// personModel.create({
@@ -28,11 +32,7 @@
 			// });
 
 			//entity
-			var personEntity = new personModel({
-				name:"jajabing",
-				age:27,
-				title:"programer"
-			});
+			var personEntity = new personModel(obj);
 			personEntity.save();
 			console.log(personEntity.name);
 			console.log('data is saved');
