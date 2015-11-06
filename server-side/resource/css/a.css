@@ -8,3 +8,15 @@ img{
 	height: 500px;
 	width: 250px;
 }
+button{
+	font-size: 24px;
+	margin:10px;
+}
+#container{
+	width:1000px;
+	height: auto;
+}
+.content{
+	width: 1000px;
+	display: none;
+}

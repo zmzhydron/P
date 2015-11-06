@@ -30,6 +30,8 @@
 	//全部请求都会通过这个中间件,注意USE方法传入的参数只有回调函数，没有监听的路径，这说明是全局中间件
 	route.use(function(req,res,next){
 		console.log(" all tranffic must to throut me");
+		console.log(req.url)
+		console.log("*************************************")
 		next();
 	});
 

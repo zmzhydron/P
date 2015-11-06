@@ -2,16 +2,44 @@
 <head>
 	<title>page 11-1</title>
 	<script type="text/javascript" src='../js/jquery.js'></script>
-	<link rel="stylesheet" type="text/css" href="../../css/a.css">
+
+	<link rel="stylesheet" type="text/css" href="csses/a.css">
 </head>
 <body>
 	<h1>this is my first express page;</h1>
-	<img id='bgimg' alt="1231234" src='image/animation_pro.png'/>
+<!-- 	<img id='bgimg' alt="1231234" src='image/animation_pro.png'/>
 	<img alt="1231234" src='image/3.jpg'/>
-	<img alt="1231234" src='image/1.jpg'/>
-	<button id='bta'>by clicking this button will send a ajax to server</button>
-	<div id="imgbg"></div>
+	<img alt="1231234" src='image/1.jpg'/> -->
+	<button class="buttons" id='bt_test'>by clicking this button will send a ajax to server</button>
+	<button class="buttons" id='bt_add'>add DATA</button>
+	<button class="buttons" id='bt_update'>Update DATA</button>
+	<button class="buttons" id='bt_query'>QUERY DATA</button>
+	<button class="buttons" id='bt_remove'>DELETE DATA</button>
+
+	<div id="container">
+		<div id="contentHeader"> Current State is :  </div>
+		<div class="content" id='content_forCreateUpdate'>
+			<form>
+			<p>name: <input type='text' name = "name" placeholder = 'enter your name here' value="" id='input_name'/></p>
+			<p>age: <input type='text' name = "age" placeholder = 'enter your age here' value="" id='input_age'/></p>
+			<p>profession: <input type='text' name = "profession" placeholder = 'enter your profession here' value="" id='input_profession'/></p>
+			<p>phone: <input type='text' name = "phone" placeholder = 'enter your phone here' value="" id='input_phone'/></p>
+			<p>address: <input type='text' name = "address" placeholder = 'enter your address here' value="" id='input_address'/></p>
+			<p>income: <input type='text' name = "income" placeholder = 'enter your income here' value="" id='input_income'/></p>
+			<p>relationstatus: <input type='text' name = "relationstatus" placeholder = 'enter your relationstatus here' value="" id='input_relationstatus'/></p>
+			</form>
+		</div>
+		<div class="content" id='content_forDelteQuery'>
+			<p><span id='deletequerytext'>none</span>: <input type='text' placeholder='enter your relationstatus here' value="" id='input_relationstatus'/></p>
+		</div>
+		<div id="contentBotton">
+			<button id="confirm">confirm</button>
+			<button id="cancel">cancel</button>
+		</div>	
+	</div>
+
 	<div id='content'></div>
+	<script type="text/javascript" src='../js/11-1.js'></script>
 	<script type="text/javascript">
 		$("#bta").click(function(){
 			$.ajax({
