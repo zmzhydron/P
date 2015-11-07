@@ -19,7 +19,7 @@
 		income:Number,
 		relationstatus:String
 	});
-	var personModel = mongo.model('personModel',personSchema,'person');
+	var personModel = mongo.model('persona',personSchema,'contacts');
 
 	var m = {
 		save:function(obj){
