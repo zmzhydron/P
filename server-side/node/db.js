@@ -23,22 +23,19 @@
 
 	var m = {
 		save:function(obj){
+			/*
+				model操作表，entity操作表中的一条document
+			*/
 			//model
 			
-			// personModel.create({
-			// 	name:'5647456',
-			// 	age:665,
-			// 	title:"CFO"
-			// });
-
+			personModel.create(obj);
 			//entity
-			var personEntity = new personModel(obj);
-			personEntity.save();
-			console.log(personEntity.name);
+			// var personEntity = new personModel(obj);
+			// personEntity.save();
 			console.log('data is saved');
 		},
 		createSchema:function(){
-
+			console.log("@@@@@@@@@");
 		},
 		update:function(){
 
@@ -46,8 +43,16 @@
 		remove:function(){
 
 		},
-		find:function(){
-
+		find:function(req,res,next){
+			//这是一个异步查询
+			personModel.find(function(err,data){
+				if(err){
+					console.log('DB ERROR');
+				}
+				console.log(data);
+				console.log('*************');
+				res.send(JSON.stringify(data));
+			})
 		},
 		test:function(req,res,next,val){
 			res.appendInfo = val;

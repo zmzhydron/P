@@ -25,6 +25,7 @@ var z = {
 	},
 	changeState:function(state){
 		if(!state) return;
+		this.stateID = state;
 		this.head.html("Current State is: " + this.refState[state]);
 		if(state === 'add' || state === 'update'){
 			this.forms.show();
@@ -55,7 +56,7 @@ var z = {
 			inputs.eq(o).val('');
 		})
 	},
-	ok:function(){
+	update:function(){
 		var str = this.currentCotnent.find("form").serialize();
 		str = str.split("&");
 		var obj = {};
@@ -63,13 +64,40 @@ var z = {
 			var attr = str[s].split('=');
 			obj[attr[0]] = attr[1];
 		}
-		console.log(obj);
 		$.ajax({
 			url:'http://127.0.0.1:8888/poster',
 			type:'post',
 			data:obj,
 			success:function(data){
-				alert('success!');
+				console.log('success!');
+			}
+		})
+	},
+	ok:function(){
+		switch(this.stateID){
+			case 'add':
+				this.update('add');
+				break;
+			case 'update':
+				this.update('update');
+				break;
+			case 'delete':
+				this.remove();
+				break;
+			case 'query':
+				this.query();
+				break;
+			default:
+				console.log('null function');
+				break;
+		}
+	},
+	query:function(){
+		$.ajax({
+			url:'http://127.0.0.1:8888/getPerson',
+			type:'get',
+			success:function(data){
+				console.log(data);
 			}
 		})
 	}

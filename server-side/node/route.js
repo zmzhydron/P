@@ -24,6 +24,9 @@
 				msg:JSON.stringify(req.body)
 			});
 		},
+		get:function(req,res,next){
+			var data = db.find(req,res,next);
+		}
 	}
 
 	/*
@@ -32,8 +35,6 @@
 	//全部请求都会通过这个中间件,注意USE方法传入的参数只有回调函数，没有监听的路径，这说明是全局中间件
 	route.use(function(req,res,next){
 		console.log(" all tranffic must to throut me");
-		console.log(req.url)
-		console.log("*************************************")
 		next();
 	});
 
@@ -44,6 +45,8 @@
 	//resetful post
 
 	route.post('/poster',middle.post);
+
+	route.get('/getPerson',middle.get);
 
 	// ‘/fuck’访问 127.0.0.1:8888/fuck
 	route.get('/fuck',function(req,res){
