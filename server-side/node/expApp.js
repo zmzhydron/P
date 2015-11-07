@@ -12,7 +12,7 @@
 	*/
 
 	app.use('/js',exp.static('../resource/javascript'));
-	app.use('/image',exp.static('../resource/image'));
+	app.use('/img',exp.static('../resource/image'));
 	app.use('/csses',exp.static('../resource/css'));
 	app.use(exp.static('../resource/pages'));
 
