@@ -1,16 +1,24 @@
 var http = require('http');
 
+var count = 0;
+
+
+
 var option = {
 	hostname:'www.ifeng.com',
 	method:'GET'
 }
-var req = http.request(option,function(res){
-	console.log(res);
-	console.log('*************************************')
+var req = http.get('http://www.zhangmingzhi.cn',function(res){
+	var str = '';
 	res.on('data',function(chunk){
-		// console.log(chunk)
+		str += chunk;
+	})
+	res.on('end',function(){
+		// console.log(str);
 	})
 });
 
+count++;
+console.log(count,"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 req.end();
 
