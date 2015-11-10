@@ -6,13 +6,15 @@ var fs = require('fs'),
 	path = require('path');
 
 //option 为请求的对象，一般通过http.request来请求，可以详细的添加参数，就和$.ajax 和 $.get 区别一样 http://goalnertors.tumblr.com/archive/2015/1
+//http://40-wife.tumblr.com/archive
+//http://fatjuicyass.tumblr.com/archive
 var option = {
-	host:'goalnertors.tumblr.com',
-	path:'/archive/2015/9',
+	host:'40-wife.tumblr.com',
+	path:'/archive/2015/11',
 	method:'GET'
 }
 // 一般通过GET 方式来请求
-var req = http.request(option,function(res){
+var req = http.get('http://ass.tumblr.com/archive',function(res){
 	var str = '';
 	res.on('data',function(chunk){
 		str += chunk; //得到请求的数据
@@ -36,7 +38,6 @@ function getData(data){
 	$('.photoset_photo.rapid-noclick-resp').each(function(i){
 		//一般网站下的图片路径都是相对的，所以要加载其根目录的东西
 		var src = $(this).attr('href');
-		console.log(src,"  ********************");
 		imgs.push(src);
 	});
 	downLoadData(imgs);
@@ -55,7 +56,9 @@ function tumblr(data){
 		/*
 			根据得到archive 中的url 来分别请求
 		*/
-		var req = http.get($(this).attr('href'),function(res){
+		var src = $(this).attr('href');
+		// console.log(src,'  ******************')
+		var req = http.get(src,function(res){
 			var str = '',
 				list = [];
 			res.on('data',function(chunk){
@@ -64,20 +67,42 @@ function tumblr(data){
 			res.on('end',function(){
 				var $ = cheerio.load(str);
 				//如果有iframe == 多个图片
-				var iframe = $('iframe');
-				if(iframe[0]){
-					var src = iframe.attr('src');
-					getLevelThree(src);
-				}else{
-					$('.photo-wrapper').find('img').each(function(){
+				// var iframe = $('iframe');
+
+				// if(iframe[0]){
+				// 	console.log(iframe[0])
+				// 	var src = iframe.attr('src');
+				// 	if(src){
+				// 		getLevelThree(src);
+				// 	}
+				// 	console.log('123123',src)
+					
+				// }else{
+				// 	$('.photo-wrapper').find('img').each(function(){
+				// 		list.push($(this).attr('src'));
+				// 		console.log($(this).attr('src'),"  *************");
+				// 	});
+				// 	downLoadData(list);
+				// }
+				$('img').each(function(){
+					var parent = $(this).parent();
+					// console.log(parent);
+					// console.log("******************")
+					if(parent[0] && parent[0].name === 'a'){
+						// console.log(parent.attr('href'));
+						if(parent.attr('href').indexOf('jpg') !== -1){
+							list.push($(this).parent().attr('href'));
+						}
+					}else{
 						list.push($(this).attr('src'));
-						// console.log($(this).attr('src'),"  *************")
-					});
-					downLoadData(list);
-				}
+					}
+					
+				});
+				downLoadData(list);
 			})
 		});
 		req.end();
+		// return false;
 	});
 
 	var getLevelThree = function(src){
@@ -102,11 +127,26 @@ function downLoadData(list){
 	var core = function(){
 		if(list[s]){
 			var name = path.basename(list[s]);
-			request.get(list[s]).pipe(fs.createWriteStream('C:/Users/zhangmingzhi/Desktop/test/'+name)).on('close',function(){
-				// console.log(name,"@@@@@@@@@@@@@@@@@");
-				s++;
-				core();
-			})
+			if(name.indexOf('png') !== -1 || name.indexOf('jpg') !== -1){
+				request.get(list[s]).on("response",function(response){
+					//判断长度;
+					// console.log(response.headers['content-length'],typeof response.headers['content-length'])
+					if(parseInt(response.headers['content-length']) > 2000){
+						// console.log(response.headers['content-length']," **************");
+						this.pipe(fs.createWriteStream('C:/Users/zhangmingzhi/Desktop/show/'+name));
+					}else{
+						
+					}
+				}).on('close',function(){
+					console.log(name,"@@@@@@@@@@@@@@@@@");
+				})
+				// .pipe(fs.createWriteStream('C:/Users/zhangmingzhi/Desktop/show/'+name)).on('close',function(){
+				// 	// console.log(name,"@@@@@@@@@@@@@@@@@");
+					
+				// })
+			}
+			s++;
+			core();
 		}
 	}
 	core();
