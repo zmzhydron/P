@@ -1,5 +1,5 @@
 	var route = require('express').Router();  //路由子模块；
-	var copy = require('copyjs');
+	var copy = require('file');
 	/*
 		mongoDB
 	*/
@@ -30,11 +30,8 @@
 		},
 		copy:function(req,res,next){
 			var params = req.body;
-			var returns = copy.setParams(params);
-			// copy.writefile();
-			// copy.stream();
-			copy.oprateDirectors(req,res,next);
-			// res.send(returns);
+			copy.setParams(params,req,res,next);
+			copy.opfn();
 		}
 	}
 

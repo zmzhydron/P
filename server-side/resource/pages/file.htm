@@ -1,0 +1,76 @@
+<html>
+<head>
+	<title>copy and show director infos~~~</title>
+	<script type="text/javascript" src='../js/jquery.js'></script>
+	<meta http-equiv ='content-type' content='charset=utf-8'>
+</head>
+<body>
+	<div class='container'>
+		<h1>control panels</h1>
+		<label for='origin'>来源：</label> <input type='text' id='origin' value = 'f:/copytest/1.txt' placeholder='input your origin source'/>
+		<label for='target'>目标：</label> <input type='text' id='target' placeholder='input your target route'/>
+		<label for='strings'>目标：</label> <input type='text' id='strings' placeholder='input your inputs' style='width:500px'/>
+		<p>
+			<label for='async'>async:</label> <input type='radio' name ='syncType' id='async' value='async'/>
+			<label for='sync'>sync:</label> <input type='radio' name ='syncType' id='sync' value='sync'/>
+			<!-- <label for='dirinfo'>dirinfo:</label> <input type='radio' name ='syncType' id='dirinfo' value='dirinfo'/> -->
+		</p>
+		<div id='opfns'>
+			<h2>选择操作方式:</h2>
+			<label for='readStream'>读流:</label> <input type='radio' name ='opfn' id='readStream' value='readStream'/> |
+			<label for='writeStream'>写流:</label> <input type='radio' name ='opfn' id='writeStream' value='writeStream'/> |
+			<label for='walkDir'>遍历文件夹:</label> <input type='radio' name ='opfn' id='walkDir' value='walkDir'/> |
+			<label for='makeDir'>创建文件夹:</label> <input type='radio' name ='opfn' id='makeDir' value='makeDir'/> |
+			<label for='readFile'>读取文件:</label> <input type='radio' name ='opfn' id='readFile' value='readFile'/> |
+			<label for='writeFile'>写入文件:</label> <input type='radio' name ='opfn' id='writeFile' value='writeFile'/> |
+			<label for='deleteFile'>删除文件:</label> <input type='radio' name ='opfn' id='deleteFile' value='deleteFile'/> |
+			<label for='appendFile'>追加内容:</label> <input type='radio' name ='opfn' id='appendFile' value='appendFile'/> |
+			<label for='copy'>复制:</label> <input type='radio' name ='opfn' id='copy' value='copy'/> |
+		</div>
+		<p>
+			<button id="go">gogogo</button>
+		</p>
+		<h2>resulte shows here：</h2>
+		<div id='content'>
+			111
+		</div>
+	</div>	
+	<script type="text/javascript">
+		$("#go").click(function(){
+			console.log()
+			$.ajax({
+				url:'/copy',
+				type:'post',
+				data:{
+					'ori':$("#origin").val(),
+					'tar':$('#target').val(),
+					'type':$("input[type=radio]:checked").attr("value"),
+					'text':$("#strings").val(),
+					'fntype':$("#opfns input:checked").attr('value')
+				},
+				success:function(resp){
+					$("#content").html(resp);
+					console.log(resp);
+				}
+			})
+		});
+
+		(function(){
+			var me = {
+				name:{
+					first:"zhangmingzhi"
+				}
+			}
+			var asd;
+			function hehe(me){
+				asd = me;
+			}
+			function a(){
+				console.log(asd);
+			}
+			hehe(me);
+			a();
+		})();
+	</script>
+</body>
+</html>
