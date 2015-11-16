@@ -1,5 +1,6 @@
 	var route = require('express').Router();  //路由子模块；
 	var copy = require('file');
+	var osTest = require('osTest');
 	/*
 		mongoDB
 	*/
@@ -32,6 +33,9 @@
 			var params = req.body;
 			copy.setParams(params,req,res,next);
 			copy.opfn();
+		},
+		SystemInfo:function(req,res,next){
+			 osTest.init(req,res,next);
 		}
 	}
 
@@ -55,6 +59,8 @@
 	route.post('/poster',middle.post);
 
 	route.get('/getPerson',middle.get);
+
+	route.get('/SystemInfo',middle.SystemInfo)
 
 	// ‘/fuck’访问 127.0.0.1:8888/fuck
 	route.get('/fuck',function(req,res){

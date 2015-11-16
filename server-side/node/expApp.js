@@ -2,6 +2,7 @@
 	var exp = require('express');
 	var app = exp();
 	var bodyParder = require('body-parser');
+
 	
 	//解析POST传递过来的JSON/XML数据。
 	//两种写法;
@@ -27,8 +28,7 @@
 		路由系列
 	*/
 	//通过Router来通过一个单独的文件来写路由处理；
-	app.use(require('./route'));
-	
+	app.use(require('./route'));	
 	var server = app.listen(8888,function(req,res){
 		
 	});
