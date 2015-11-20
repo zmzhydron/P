@@ -3,6 +3,7 @@
 	var app = exp();
 	var bodyParder = require('body-parser');
 
+	debugger;
 	
 	//解析POST传递过来的JSON/XML数据。
 	//两种写法;
