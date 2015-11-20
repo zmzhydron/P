@@ -1,0 +1,13 @@
+requirejs.config({
+	baseUrl:"js/lib",
+	paths:{
+		jquery:'jquery',
+		tools:'tools'
+	}
+})
+requirejs(['tools'],function(tools){
+	console.log(tools.say());
+	$("#me").click(function(){
+		alert(1);
+	})
+});

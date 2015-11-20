@@ -1,0 +1,18 @@
+<html>
+<head>
+	<title></title>
+	<script src='require.js' data-main='RequireEntry.js' ></script>
+</head>
+<body>
+	<button id="me">mememe</button>
+	<button id="m111e">mememe</button>
+	<script type="text/javascript">
+		setTimeout(function(){
+			console.log($);
+			$("#m111e").click(function(){
+				alert(this.nodeName);
+			})
+		},1000);
+	</script>
+</body>
+</html>
