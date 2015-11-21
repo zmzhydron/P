@@ -7,9 +7,23 @@ define(['jquery'],function($){
 			return Array.prototype.slice.call(str);
 		},
 		say:function(){
-			console.log($);
 			window.$ = $;
 			return 'hi there';
+		},
+		mix:function(receive,give,isDeep){
+			if(isDeep){
+
+			}else{
+				for(var s in give){
+					if(give.hasOwnProperty(s)){
+						if(!receive[s]){
+							
+						}
+					}
+					receive[s] = give[s];
+				}
+				return receive;
+			}
 		}
 	}
 	return OOP;
