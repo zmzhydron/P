@@ -11,3 +11,6 @@ requirejs(['tools'],function(tools){
 		alert(1);
 	})
 });
+require(['OOP'],function(oop){
+	console.log(oop.say());
+});
