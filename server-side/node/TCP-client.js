@@ -18,7 +18,7 @@ req.write('fuck you man zhang ming zhi 1234',function(){
 req.on('data',function(chunk){
 	console.log('length is: '+chunk.length);
 	console.log(chunk +"  receive time: "+new Date().getTime());
-	req.end();
+	// req.end();
 })
 req.on('end',function(chunk){
 	console.log("client is end");

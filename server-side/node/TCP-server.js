@@ -18,10 +18,10 @@ var server = net.createServer(function(socket){
 	socket.setEncoding('utf8');
 	socket.on('data',function(chunk){
 		str += chunk;
-		console.log(chunk);
+		console.log('client send : '+chunk);
+		console.log(socket.address().port,socket.address().family,socket.address().address);
 		// readFile(socket);
-		writeFile(socket,chunk,true);
-		// console.log(socket.address())
+		// writeFile(socket,chunk,true);
 	});
 	socket.on('end',function(){
 		console.log('server is end');
@@ -62,7 +62,8 @@ function writeFile(socket,data,type){
 		// socket.on('end',function(){
 		// 	console.log('transifer data completed *************************')
 		// })
-		socket.pipe(targetStream);
+		targetStream.write(data);
+		socket.write('*****************');
 	}else{
 		fs.writeFile(fp,data,null,null,function(error){
 			if(error){
