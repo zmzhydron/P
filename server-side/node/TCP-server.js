@@ -35,7 +35,9 @@ server.on('connection',function(socket){
 	socket.on('end',function(){
 		console.log('server is end');
 	});
-
+})
+server.on('connection',function(){
+	console.log(" ONE USER HAS LOGIN");
 })
 
 function readFile(socket,type){
