@@ -23,3 +23,24 @@ req.on('data',function(chunk){
 req.on('end',function(chunk){
 	console.log("client is end");
 })
+
+module.exports = {
+	write:function(str,request,res,next,callback){
+		if(str.toLowerCase() === 'exit'){
+			req.write(str,function(){
+				res.send({
+					data:"exiting this program"
+				});
+				req.end();
+			})
+		}else{
+			req.write(str,function(){
+				request.passMessage = {
+					'data':'TCP is finish send data: '+str+' bye paul'
+				}
+				next();
+			})
+		}
+		
+	}
+}

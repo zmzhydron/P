@@ -1,0 +1,29 @@
+<html>
+<head>
+	<title>TCP client Request page</title>
+	<meta http-equiv='content-type' content='charset=utf-8'/> 
+	<script type="text/javascript" src='js/jquery.js'></script>
+</head>
+<body>
+	<h2>talk to a tcp-server,input exit to end transimition</h2>
+	<input id="inputa" type='input' placeholder='input your requese here'/>
+	<button id="bta">request！</button>
+	<div id="content"></div>
+	<script type="text/javascript">
+		var str = '';
+		$("#bta").bind('click',function(){
+			$.ajax({
+				url:'/TCPClient',
+				type:'post',
+				data:{
+					txt:$("#inputa").val()
+				},
+				success:function(data){
+					str = "<p>"+data.data+"</p>";
+					$("#content").append(str);
+				}
+			})
+		})
+	</script>
+</body>
+</html>

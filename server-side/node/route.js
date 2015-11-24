@@ -1,11 +1,15 @@
 	var route = require('express').Router();  //路由子模块；
-	var copy = require('file');
-	var osTest = require('osTest');
+	 	copy = require('file'),
+	 	osTest = require('osTest');
 	/*
 		mongoDB
 	*/
-	var db = require('./db');
-	
+	// var db = require('./db');
+	/*
+		TCP
+	*/
+	var tpcClient = require('./TCP-client');
+
 	var middle = {
 		a:function(req,res,next){
 			console.log("this is middleware AA");
@@ -35,7 +39,17 @@
 			copy.opfn();
 		},
 		SystemInfo:function(req,res,next){
-			 osTest.init(req,res,next);
+			osTest.init(req,res,next);
+		},
+		tcpClient:function(req,res,next){
+			var params = req.body;
+			tpcClient.write(params.txt,req,res,next);
+		},
+		TCPfinalRoute:function(req,res,next){
+			console.log(req.passMessage.data+"  ********************");
+			res.send({
+				data:req.passMessage.data
+			})
 		}
 	}
 
@@ -60,7 +74,11 @@
 
 	route.get('/getPerson',middle.get);
 
-	route.get('/SystemInfo',middle.SystemInfo)
+	route.get('/SystemInfo',middle.SystemInfo);
+
+	route.post('/TCPClient',middle.tcpClient);
+
+	route.all('/TCPClient',middle.TCPfinalRoute);
 
 	// ‘/fuck’访问 127.0.0.1:8888/fuck
 	route.get('/fuck',function(req,res){
