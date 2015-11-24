@@ -43,7 +43,8 @@
 		},
 		tcpClient:function(req,res,next){
 			var params = req.body;
-			tpcClient.write(params.txt,req,res,next);
+			console.log(params.userName+" ************* "+params.txt)
+			tpcClient.write(params.userName,params.txt,req,res,next);
 		},
 		TCPfinalRoute:function(req,res,next){
 			console.log(req.passMessage.data+"  ********************");
@@ -62,6 +63,7 @@
 		next();
 	});
 
+
 	route.use('/jaja',[middle.a,middle.b],function(req,res){
 		res.send(" IAM JAJA FORM STAR WAR XIIII");
 	});
@@ -78,7 +80,8 @@
 
 	route.post('/TCPClient',middle.tcpClient);
 
-	route.all('/TCPClient',middle.TCPfinalRoute);
+
+	// route.all('/TCPClient',middle.TCPfinalRoute);
 
 	// ‘/fuck’访问 127.0.0.1:8888/fuck
 	route.get('/fuck',function(req,res){

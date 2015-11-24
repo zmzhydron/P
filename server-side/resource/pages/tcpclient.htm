@@ -6,7 +6,9 @@
 </head>
 <body>
 	<h2>talk to a tcp-server,input exit to end transimition</h2>
+	<input id="username" type='input' placeholder='input your user name here'/>
 	<input id="inputa" type='input' placeholder='input your requese here'/>
+	<button id="login">join the chat</button>
 	<button id="bta">request！</button>
 	<div id="content"></div>
 	<script type="text/javascript">
@@ -16,11 +18,25 @@
 				url:'/TCPClient',
 				type:'post',
 				data:{
-					txt:$("#inputa").val()
+					txt:$("#inputa").val(),
+					userName:$("#username").val()
 				},
 				success:function(data){
 					str = "<p>"+data.data+"</p>";
 					$("#content").append(str);
+				}
+			})
+		})
+		$("#login").bind('click',function(){
+			$.ajax({
+				url:'/TCPClient',
+				type:'post',
+				data:{
+					txt:$("#inputa").val(),
+					userName:$("#username").val()
+				},
+				success:function(data){
+					console.log(data);
 				}
 			})
 		})

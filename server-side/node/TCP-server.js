@@ -13,23 +13,30 @@ var option = {
 	port:8899
 }
 
-var server = net.createServer(function(socket){
+var socketList = [];
+
+var server = net.createServer();
+server.listen(8899,function(){
+	console.log('server started')
+});
+server.on('connection',function(socket){
+	socketList.push(socket);
 	var str = '';
 	socket.setEncoding('utf8');
 	socket.on('data',function(chunk){
+		console.log("server ondata: ************ "+chunk)
+		for(var s = 0,len = socketList.length;s<len;s++){
+			socketList[s].write(chunk);
+		}
 		str += chunk;
-		console.log('client send : '+chunk);
-		console.log(socket.address().port,socket.address().family,socket.address().address);
 		// readFile(socket);
 		// writeFile(socket,chunk,true);
 	});
 	socket.on('end',function(){
 		console.log('server is end');
-	})
-});
-server.listen(8899,function(){
-	console.log('server started')
-});
+	});
+
+})
 
 function readFile(socket,type){
 	if(!socket) return;

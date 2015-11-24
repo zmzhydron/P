@@ -8,39 +8,53 @@ var option = {
 	port:8899
 }
 
-var req = net.connect(option,function(){
-	console.log('THIS RESPONSE IS AS FLLOWS');
-})
-req.write('fuck you man zhang ming zhi 1234',function(){
-	console.log("request send success");
-	
-});
-req.on('data',function(chunk){
-	console.log('length is: '+chunk.length);
-	console.log(chunk +"  receive time: "+new Date().getTime());
-	// req.end();
-})
-req.on('end',function(chunk){
-	console.log("client is end");
-})
+var connectionList = {}; 
 
-module.exports = {
-	write:function(str,request,res,next,callback){
+function createConnection(userName,request,res,next){
+	var socket = net.connect(option,function(){
+		console.log('USER: '+ userName +' HAS LOGIN');
+	});
+	socket.setEncoding('utf8')
+	socket.user = userName;
+	connectionList[userName] = socket;
+	
+	socket.write('welcome user: '+userName+" join the chatroom!",function(){
+	});
+	socket.on('data',function(chunk){
+		// res.send(chunk);
+		console.log(chunk);
+	})
+	socket.on('end',function(){
+		console.log("USER: "+userName+ " HAS LEFT CHATROOM");
+	})
+}
+var client = {
+	write:function(userName,str,request,res,next){
+		if(!connectionList[userName]){
+			client.create(userName,request,res,next);
+		}
+		var socket = connectionList[userName];
 		if(str.toLowerCase() === 'exit'){
-			req.write(str,function(){
+			socket.write(str,function(){
 				res.send({
 					data:"exiting this program"
 				});
-				req.end();
+				socket.end();
 			})
 		}else{
-			req.write(str,function(){
-				request.passMessage = {
-					'data':'TCP is finish send data: '+str+' bye paul'
-				}
-				next();
+			var s = "User: "+socket.user+" say: "+ str;
+			socket.write(s,function(){
+				res.send({
+					'data':s
+				})
 			})
 		}
 		
+	},
+	create:function(userName,request,res,next){
+		if(!connectionList[userName]){
+			createConnection(userName,request,res,next);
+		}
 	}
 }
+module.exports = client;
