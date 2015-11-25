@@ -5,6 +5,9 @@ requirejs.config({
 		tools:'tools'
 	}
 })
+Object.prototype.addMethod = function(prop,fn){
+	this.prototype[prop] = fn;
+}
 requirejs(['tools'],function(tools){
 	console.log(tools.say());
 	$("#me").click(function(){
