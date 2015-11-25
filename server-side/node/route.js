@@ -10,6 +10,12 @@
 	*/
 	var tpcClient = require('./TCP-client');
 
+	/*
+		WebSocket
+	*/
+
+	var chatroom = require('chatroom');
+
 	var middle = {
 		a:function(req,res,next){
 			console.log("this is middleware AA");
@@ -51,6 +57,10 @@
 			res.send({
 				data:req.passMessage.data
 			})
+		},
+		chatroom:function(req,res,next){
+			chatroom.addUser();
+			res.send('11111');
 		}
 	}
 
@@ -79,6 +89,8 @@
 	route.get('/SystemInfo',middle.SystemInfo);
 
 	route.post('/TCPClient',middle.tcpClient);
+
+	route.post('/chatroom',middle.chatroom);
 
 
 	// route.all('/TCPClient',middle.TCPfinalRoute);

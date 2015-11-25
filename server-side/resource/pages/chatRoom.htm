@@ -1,0 +1,70 @@
+<html>
+<head>
+	<title>this is zmz's chatroom</title>
+	<meta http-equiv='content-type' content='charset="utf8"'/>
+	<script type="text/javascript" src='js/jquery.js'></script>
+	<style type="text/css">
+		#chatroom{
+			height:600px;
+			width: 1000px;
+			overflow: scroll;
+
+		}
+		#chatroom .chats{
+			height: 20px;
+			line-height: 20px;
+			word-break:break-all;
+			font-size: 14px;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="chatroom"></div>
+	<div id='control'>
+		<div> 
+			<input type='input' placeholder='input your user name here' id='userbox'/>
+			<button id="login">login</button>
+			<input type='input' placeholder='input your thouths here' id='chat'/>
+			<button id="chatBtn">chat</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var ws;
+		var chatroom  = $('#chatroom');
+		$("#chatBtn").bind('click',function(){
+			if(ws){
+				var obj = {
+					user:$("#userbox").val(),
+					data:$("#chat").val()
+				}
+				ws.send(JSON.stringify(obj));
+			}
+		})
+		$("#login").bind('click',function(){
+			$.ajax({
+				url:'/chatroom',
+				type:'post',
+				data:{
+					user:$("#userbox").val()
+				},
+				success:function(resp){
+					ws = new WebSocket("ws://127.0.0.1:8889");
+					ws.onopne = function(){
+						console.log('sw open')
+					}
+					ws.onmessage = function(event){	
+						renderData(event.data);
+					}
+					ws.onclose = function(){
+						console.log('socket closed')
+					}
+				}
+			})
+		})
+		function renderData(data){
+			chatroom.append('<p class="chats">'+ data +'</p>');
+		}
+	</script>
+</body>
+</html>
