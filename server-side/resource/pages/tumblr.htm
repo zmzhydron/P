@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>tumblr downloader</title>
+	<style type="text/css">
+		#go,p,input{
+			font-size: 36px;
+			font-weight: bolder;
+		}
+		#result{
+			font-size:16px;
+		}
+	</style>
+</head>
+<body>
+	<p>host:<input id="host" type='text' placeholder='host'/></p>
+	<p>dir:<input id="dir" type='text' placeholder='dir'/></p>
+	<button id="go">go</button>
+	<div id="result"></div>
+	<script type="text/javascript" src='js/jquery.js'></script>
+	<script type="text/javascript">
+		$("#go").click(function(){
+			console.log()
+			$.ajax({
+				url:'/tumblr',
+				type:'post',
+				data:{
+					'host':$("#host").val(),
+					'dir':$('#dir').val()
+				},
+				success:function(resp){
+					$("#result").html(resp);
+					console.log(resp);
+				}
+			})
+		});
+	</script>
+</body>
+</html>

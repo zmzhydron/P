@@ -16,6 +16,12 @@
 
 	var chatroom = require('chatroom');
 
+	/*
+		tumblrdownloader
+	*/
+
+	var tumblrdownloader = require('./tumblr');
+
 	var middle = {
 		a:function(req,res,next){
 			console.log("this is middleware AA");
@@ -61,6 +67,11 @@
 		chatroom:function(req,res,next){
 			chatroom.addUser();
 			res.send('11111');
+		},
+		tumblr:function(req,res,next){
+			var params = req.body;
+			console.log(params);
+			tumblrdownloader(params.host,params.dir,req,res,next);
 		}
 	}
 
@@ -92,7 +103,7 @@
 
 	route.post('/chatroom',middle.chatroom);
 
-
+	route.post('/tumblr',middle.tumblr);
 	// route.all('/TCPClient',middle.TCPfinalRoute);
 
 	// ‘/fuck’访问 127.0.0.1:8888/fuck
