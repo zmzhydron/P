@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title>extend test page</title>
+	<script type="text/javascript">
+		function main(){
+
+			function Clone(obj){
+				function F(){};
+				F.prototype = obj;
+				return new F();
+			}
+
+			function SubClass(){
+
+			}
+			function Class(){
+
+			}
+			Class.extend = function(obj){
+				SubClass.prototype = obj;
+				
+				return Class;
+			}
+			Class.mix = function(give){
+				for(var s in give){
+					
+				}
+			}
+			return Class;
+		}
+	</script>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	var Class = main();
+	var instance = new Class();
+	console.log(instance);
+</script>
+</html>
