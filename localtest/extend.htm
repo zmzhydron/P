@@ -29,10 +29,10 @@
 				Class = obj;
 				return obj;
 			}
-			function SubClass(){
-				
-			}
-			Class.extend = function(obj){
+			// function SubClass(){
+
+			// }
+			function extend(obj){
 				function SubClass(){}
 				SubClass.prototype = eextends(obj,Class.prototype);
 				SubClass.super = Class.prototype;
@@ -40,9 +40,12 @@
 				return chain(SubClass);
 			}
 			function mix(give){
+				var proto = this.prototype;
 				for(var s in give){
-					
+					this.prototype[s] = give[s];
 				}
+				console.log(this);
+				return this;
 			}
 
 			return chain(Class);;
@@ -56,7 +59,7 @@
 	var Class = main();
 	var Animal = Class.extend({
 		eat:function(){
-			return 'cat is eating';
+			return this.name+' is eating';
 		},
 		sleep:function(){
 			return 'giant big cat is purrrring';
@@ -79,8 +82,13 @@
 	var Solider = Person.extend({
 		skill:function(){
 			return 'specilize to kill people';
+		},
+		furit:function(){
+			return 'i am: '+this.name+" and iam eating: "+this.food;
 		}
-	});
+	}).mix({
+		food:"watermalone"
+	})
 
 	var tank = Solider.extend({
 		armor:function(){
@@ -99,9 +107,11 @@
 	console.log(me.eat())
 	console.log(me.die())
 	console.log(ussr.skill())
+	console.log(ussr.furit())
 	console.log(m1.shit())
 	console.log(m1);
 	console.log(m1.armor())
+	console.log(m1.food);
 
 </script>
 </html>
