@@ -9,27 +9,43 @@
 				F.prototype = obj;
 				return new F();
 			}
-
-			function SubClass(){
-
-			}
 			function Class(){
 
 			}
-			Class.extend = function(obj){
-				function F(){};
-				F.prototype = Class.prototype;
-				var tempPrototype  = new F();
-				
-				
-				return Class;
+			Class.id = 'superr';
+			function eextends(sub,superr){
+				var r = {};
+				for(var s in superr){
+					r[s] = superr[s];
+				}
+				for(var m in sub){
+					r[m] = sub[m];
+				}
+				return r;
 			}
-			Class.mix = function(give){
+			function chain(obj){
+				obj.extend = extend;
+				obj.mix = mix;
+				Class = obj;
+				return obj;
+			}
+			function SubClass(){
+				
+			}
+			Class.extend = function(obj){
+				function SubClass(){}
+				SubClass.prototype = eextends(obj,Class.prototype);
+				SubClass.super = Class.prototype;
+				SubClass.id = 'sub';
+				return chain(SubClass);
+			}
+			function mix(give){
 				for(var s in give){
 					
 				}
 			}
-			return Class;
+
+			return chain(Class);;
 		}
 	</script>
 </head>
@@ -38,7 +54,54 @@
 </body>
 <script type="text/javascript">
 	var Class = main();
-	var instance = new Class();
-	console.log(instance);
+	var Animal = Class.extend({
+		eat:function(){
+			return 'cat is eating';
+		},
+		sleep:function(){
+			return 'giant big cat is purrrring';
+		},
+		shit:function(){
+			return 'i am'+this.name+" and i am shitting my self";
+		}
+	});
+	var cat = new Animal();
+	cat.name = 'tommyCat';
+	var Person = Animal.extend({
+		eat:function(){
+			return 'eating banana';
+		},
+		die:function(){
+			return 'person dies';
+		}
+	})
+
+	var Solider = Person.extend({
+		skill:function(){
+			return 'specilize to kill people';
+		}
+	});
+
+	var tank = Solider.extend({
+		armor:function(){
+			return this.name + ' has solid steel armor';
+		}
+	})
+
+	var me = new Person();
+	me.name ='zhangmingzhi';
+	var ussr = new Solider();
+	ussr.name ='seal team';
+
+	var m1 = new tank();
+	m1.name = 'briady';
+	console.log(cat.eat())
+	console.log(me.eat())
+	console.log(me.die())
+	console.log(ussr.skill())
+	console.log(m1.shit())
+	console.log(m1);
+	console.log(m1.armor())
+
 </script>
 </html>
