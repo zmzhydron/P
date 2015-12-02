@@ -33,9 +33,12 @@
 
 			// }
 			function extend(obj){
-				function SubClass(){}
+				function SubClass(){
+
+				}
 				SubClass.prototype = eextends(obj,Class.prototype);
-				SubClass.super = Class.prototype;
+				SubClass.prototype.super = Class.prototype;
+				SubClass.prototype.constructor = Class;
 				SubClass.id = 'sub';
 				return chain(SubClass);
 			}
@@ -77,41 +80,47 @@
 		die:function(){
 			return 'person dies';
 		}
+	}).mix({
+		watch:function(){
+			return ' this is moden age , we watch television'
+		}
 	})
 
-	var Solider = Person.extend({
+	var Soldier = Person.extend({
 		skill:function(){
 			return 'specilize to kill people';
 		},
 		furit:function(){
 			return 'i am: '+this.name+" and iam eating: "+this.food;
+		},
+		rank:function(){
+			return this.name + ' is solider';
 		}
-	}).mix({
-		food:"watermalone"
 	})
 
-	var tank = Solider.extend({
+	var tank = Soldier.extend({
 		armor:function(){
-			return this.name + ' has solid steel armor';
+			
+			return this.name + 'has solid steel armor';
+		},
+		rank:function(){
+			return 'this is a tank\'s rank';
 		}
 	})
 
 	var me = new Person();
 	me.name ='zhangmingzhi';
-	var ussr = new Solider();
-	ussr.name ='seal team';
+	var individual = new Soldier();
+	individual.name ='seal team';
 
 	var m1 = new tank();
 	m1.name = 'briady';
-	console.log(cat.eat())
-	console.log(me.eat())
-	console.log(me.die())
-	console.log(ussr.skill())
-	console.log(ussr.furit())
 	console.log(m1.shit())
-	console.log(m1);
+	console.log(m1.super.furit()," m1.super.furit()");
 	console.log(m1.armor())
 	console.log(m1.food);
+	console.log(m1.super.rank.call(m1));
+	console.log(m1.rank());
 
 </script>
 </html>
