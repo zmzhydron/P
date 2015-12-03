@@ -1,0 +1,89 @@
+<html>
+<head>
+	<title>this is decorator page</title>
+	<meta http-equiv='content-type' content='chartset=utf8'/>
+	<script type="text/javascript">
+		function main(){
+			function extend(subClass,superClass){
+				function F(){};
+				F.prototype = superClass.prototype;
+				subClass.prototype = new F();
+				subClass._super = superClass;
+			}
+			function Clone(obj){}
+			function Car(name){
+				this.name = name;
+				this.price = 1000;
+				this.addPirce = function(price){
+					this.price = this.price + price;
+				}
+			}
+			Car.prototype = {
+				getPrice:function(){
+					return this.price;
+				},
+				start:function(){
+					console.log('starting engine');
+				}
+			}
+			function carDecorator(car){
+				this.car = car;
+				console.log(this.car);
+				this.addHud = function(){
+					var price = 120;
+					console.log('add hud to this car :'+this.car.name);
+					// this.car.price = this.car.getPrice() + price;
+					this.car.addPirce(price);
+				}
+			}
+			carDecorator.prototype = {
+				addTurbo:function(turbo){
+					var price = turbo * 100;
+					console.log('car is adding'+turbo+" turbos and cost for "+ price+" doller");
+					// this.car.price = this.car.getPrice() + price;
+					this.car.addPirce(price);
+				},
+				addBreak:function(){
+					var price = 225;
+					console.log('car is adding the Brombo break and stoping power is great');
+					// this.car.price = this.car.getPrice() + price;
+					this.car.addPirce(price);
+				}
+			}
+
+			function MPWOER(car){
+				MPWOER._super.call(this,car);	
+			}
+			extend(MPWOER,carDecorator);
+
+			MPWOER.prototype.addV6 = function(){
+				var price = 9999;
+				console.log('add V6 engine to this car :'+this.car.name);
+				this.car.price = this.car.getPrice() + price;
+			}
+
+			var bwm328im = new Car('BWM328IM');
+
+			// var bodyShop = new carDecorator(bwm328im);
+
+			// bodyShop.addTurbo(2);
+			// bodyShop.addBreak();
+
+			var mp = new MPWOER(bwm328im);
+			mp.addTurbo(2);
+			mp.addBreak();
+			mp.addHud();
+			mp.addV6();
+			console.log(bwm328im.getPrice());
+
+		}
+		main();
+	</script>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+</script>
+</html>
