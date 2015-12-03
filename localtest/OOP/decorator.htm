@@ -10,7 +10,9 @@
 				subClass.prototype = new F();
 				subClass._super = superClass;
 			}
-			function Clone(obj){}
+			function Clone(obj){
+
+			}
 			function Car(name){
 				this.name = name;
 				this.price = 1000;
@@ -53,7 +55,19 @@
 
 			function MPWOER(car){
 				MPWOER._super.call(this,car);	
+				this.addSound = function(){
+					var price = 1234;
+					console.log("added hansome bwm sound system! so loud so cool~~");
+					this.car.addPirce(price);
+				}
 			}
+
+			carDecorator.prototype.addTailLight = function(){
+				var price = 811;
+				console.log('this car just add Led TailLight add it\' cost :'+price);
+				this.car.addPirce(price);
+			}
+
 			extend(MPWOER,carDecorator);
 
 			MPWOER.prototype.addV6 = function(){
@@ -74,6 +88,8 @@
 			mp.addBreak();
 			mp.addHud();
 			mp.addV6();
+			mp.addSound();
+			mp.addTailLight();
 			console.log(bwm328im.getPrice());
 
 		}
