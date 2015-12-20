@@ -21,6 +21,12 @@
 	*/
 
 	var tumblrdownloader = require('./tumblr');
+	/*
+		@name photoValley
+		@desc 读取本地的照片，用组合模式、装饰者模式进行管理的照片墙 	
+	*/
+
+	var photoValley = require('./photoValley');
 
 	var middle = {
 		a:function(req,res,next){
@@ -72,6 +78,10 @@
 			var params = req.body;
 			console.log(params);
 			tumblrdownloader(params.host,params.dir,req,res,next);
+		},
+		photoValley:function(req,res,next){
+			var params = req.body;
+			photoValley(req,res,next);
 		}
 	}
 
@@ -104,6 +114,8 @@
 	route.post('/chatroom',middle.chatroom);
 
 	route.post('/tumblr',middle.tumblr);
+
+	route.all('/photoValley',middle.photoValley);
 	// route.all('/TCPClient',middle.TCPfinalRoute);
 
 	// ‘/fuck’访问 127.0.0.1:8888/fuck

@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src = 'js/jquery.js'></script>
+</head>
+<body>
+	<h1>PHOTOVALLEY</h1>
+	<button id='getphoto'>get photos</button>
+</body>
+<script type="text/javascript">
+		$("#getphoto").bind('click',function(){
+			$.ajax({
+				url:'/photoValley',
+				type:'get',
+				success:function(resp){
+					console.log(resp);
+				}
+			})
+		})
+</script>
+</html>
