@@ -1,19 +1,20 @@
 define(function(require,exports){
 	function alias(name){
 		return function(){
-			return this[name].call(this,arguments);
+			return this[name].apply(this,arguments);
 		}
 	}
+
 	function EventEmitter(){};
-	var events = {}
+	var eventObj = {}
 	var protos = EventEmitter.prototype;
 
 	protos.getEvent = function(evt){
-		if(!evt) return events;
-		if(!events[evt]){
-			events[evt] = [];
+		if(!evt) return eventObj || {};
+		if(!eventObj[evt]){
+			eventObj[evt] = [];
 		}
-		return events[evt];
+		return eventObj[evt];
 	}
 
 	protos.getFnIndex = function(evt,fn){
@@ -62,17 +63,29 @@ define(function(require,exports){
 		})
 	}
 	protos.emitevent = function(evt){
-		var events = this.getEvent();
-		for(var s = 0,len = events.length;s<len;s++){
+		var events = this.getEvent(evt);
+		var arguments = Array.prototype.slice.call(arguments,1);
+		for(var s = 0;s<events.length;s++){
 			if(events[s].isOnce){
-				events[s].splice(i,1)[0].fn();
+				console.log('trigger once event:'+evt);
+				var o = events.splice(s,1);
+				o[0].fn.apply(this,arguments);
+				if(--s < 0){
+					break;
+				}
 			}
-			events[s].fn();
+			events[s].fn.apply(this,arguments);
 		}
 	}
 	protos.trigger = alias('emitevent');
 	protos.on = alias('add');
 	protos.once = alias('addOnce');
-
-	return new EventEmitter();
+	var count = 0;
+	var init = function(){
+		debugger;
+		console.log(count);
+		count++;
+		return new EventEmitter();
+	}
+	return init();
 })

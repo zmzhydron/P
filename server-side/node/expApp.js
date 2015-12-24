@@ -21,6 +21,7 @@
 	*/
 	app.use('/test',exp.static('../../localtest'));
 	app.use('/image',exp.static('../../localtest/image'));
+	app.use(exp.static('../../localtest'));
 
 	/*
 		路由系列

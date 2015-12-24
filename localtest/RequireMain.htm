@@ -9,7 +9,10 @@
 	<script type="text/javascript">
 		setTimeout(function(){
 			$("#m111e").click(function(){
-				alert(this.nodeName);
+				console.log('1111');
+				require(['eventEmit'],function(eventEmit){
+					console.log(eventEmit);
+				})
 			})
 		},1000);
 	</script>
