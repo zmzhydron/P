@@ -17,3 +17,6 @@ requirejs(['tools'],function(tools){
 require(['OOP'],function(oop){
 	console.log(oop.say());
 });
+require(['emitterTest'],function(emit){
+	emit.start();
+})
