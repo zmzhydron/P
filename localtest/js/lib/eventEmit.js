@@ -82,7 +82,6 @@ define(function(require,exports){
 	protos.once = alias('addOnce');
 	var count = 0;
 	var init = function(){
-		debugger;
 		console.log(count);
 		count++;
 		return new EventEmitter();

@@ -14,7 +14,7 @@
 		WebSocket
 	*/
 
-	var chatroom = require('chatroom');
+	// var chatroom = require('chatroom');
 
 	/*
 		tumblrdownloader

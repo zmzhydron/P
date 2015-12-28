@@ -1,10 +1,16 @@
 requirejs.config({
-	baseUrl:"js/lib",
+	baseUrl:'../js/lib',
 	paths:{
 		jquery:'jquery',
 		tools:'tools'
+		// react:'../server-side/node_modules/react'
 	}
 })
+setTimeout(function(){
+	require(['../../server-side/node_modules/react/react.js'],function(o){
+		console.log(o);
+	});
+},3000);
 Object.prototype.addMethod = function(prop,fn){
 	this.prototype[prop] = fn;
 }
