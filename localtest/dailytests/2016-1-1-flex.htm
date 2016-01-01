@@ -1,0 +1,72 @@
+<html>
+<head>
+	<title>flex</title>
+	<style type="text/css">
+		#container{
+			display: flex;
+			border: solid 1px red;
+			height: 600px;
+			width: 2000px;
+/*			flex-direction:row;
+			flex-wrap:wrap-reverse;*/
+			flex-flow:row wrap;
+			justify-content:flex-end;
+			/*align-content:flex-start;*/
+			align-items:flex-start;
+			
+		}
+		.item{
+			background: green;
+			height: 200px;
+			width: 200px;
+		}
+		.item:nth-child(1){
+			align-self:auto;
+			/*margin-right: 50px;*/
+			background: yellow;
+		}
+		.item:nth-child(2){
+			/*align-self:flex-end;*/
+		}
+		.item:nth-child(3){
+			align-self:auto;
+		}
+		.item:nth-child(4){
+			background: red;
+			margin-top:20px;
+			flex-grow:0;
+			order:-1;
+			white-space: normal;
+			word-break:break-all;
+			/*align-self:flex-start;*/
+		}
+		.item:nth-child(11){	
+			align-self:flex-start;
+			background: lime;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<span class="item">1</span>
+		<span class="item">2</span>
+		<span class="item">3</span>
+		<span class="item">4</span>
+		<span class="item">5</span>
+		<span class="item">6</span>
+		<span class="item">7</span>
+		<span class="item">8</span>
+		<span class="item">9</span>
+		<span class="item">10</span>
+		<span class="item">11</span>
+<!-- 		<span class="item">12</span>
+		<span class="item">13</span>
+		<span class="item">14</span>
+		<span class="item">15</span>
+		<span class="item">16</span>
+		<span class="item">17</span>
+		<span class="item">18</span>
+		<span class="item">19</span> -->
+	</div>
+</body>
+</html>
