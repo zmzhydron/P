@@ -5,68 +5,138 @@
 		#container{
 			display: flex;
 			border: solid 1px red;
-			height: 600px;
-			width: 2000px;
-/*			flex-direction:row;
-			flex-wrap:wrap-reverse;*/
+			height: 900px;
+			width: 900px;
 			flex-flow:row wrap;
-			justify-content:flex-end;
-			/*align-content:flex-start;*/
-			align-items:flex-start;
+			justify-content:flex-start;
 			
 		}
+		.flexRow{
+			flex-grow:1;
+			display: flex;
+			flex-flow:row nowrap;
+			justify-content:space-around;
+			
+			align-content:flex-start;
+			align-items:center;
+		}
+		.flexItem{
+			height: 300px;
+			width: 300px;
+			box-sizing:border-box;
+			border: solid 2px pink;
+			display: flex;
+			flex-flow:column wrap;
+			align-items:stretch;
+		}
 		.item{
-			background: green;
-			height: 200px;
-			width: 200px;
+			text-align: center;
+			height:50px;
+			width: 50px;
+			background-color: green;
+			color: #ffffff;
+			font-weight:bold;
+			line-height: 50px;
 		}
-		.item:nth-child(1){
-			align-self:auto;
-			/*margin-right: 50px;*/
-			background: yellow;
+		#a2{
+			/*justify-content:space-around;*/
 		}
-		.item:nth-child(2){
-			/*align-self:flex-end;*/
+		#a2 .item{
 		}
-		.item:nth-child(3){
-			align-self:auto;
-		}
-		.item:nth-child(4){
-			background: red;
-			margin-top:20px;
-			flex-grow:0;
-			order:-1;
-			white-space: normal;
-			word-break:break-all;
-			/*align-self:flex-start;*/
-		}
-		.item:nth-child(11){	
+		#a2 .flexRow:nth-child(1){
 			align-self:flex-start;
-			background: lime;
+		}
+		#a2 .flexRow:nth-child(2){
+			align-self:center;
+		}
+		#a2 .flexRow:nth-child(3){
+			align-self:flex-end;
+		}
+		#a3 .flexRow{
+			/*justify-content:space-between;*/
+		}
+		#a3 .flexRow:nth-child(2){
+			justify-content:center;
+		}
+		#a4 .item:nth-child(1){
+			background-color: red;
+			/*align-self:flex-start;*/
 		}
 	</style>
 </head>
 <body>
 	<div id="container">
-		<span class="item">1</span>
-		<span class="item">2</span>
-		<span class="item">3</span>
-		<span class="item">4</span>
-		<span class="item">5</span>
-		<span class="item">6</span>
-		<span class="item">7</span>
-		<span class="item">8</span>
-		<span class="item">9</span>
-		<span class="item">10</span>
-		<span class="item">11</span>
-<!-- 		<span class="item">12</span>
-		<span class="item">13</span>
-		<span class="item">14</span>
-		<span class="item">15</span>
-		<span class="item">16</span>
-		<span class="item">17</span>
-		<span class="item">18</span>
-		<span class="item">19</span> -->
+		<div class="flexItem" id='a1'>
+			<div class="flexRow">
+				<span class="item">1</span>
+				<span class="item">2</span>
+				<span class="item">3</span>
+			</div>
+			<div class="flexRow">
+				<span class="item">4</span>
+				<span class="item">5</span>
+				<span class="item">6</span>
+			</div>
+			<div class="flexRow">
+				<span class="item">7</span>
+				<span class="item">8</span>
+				<span class="item">9</span>
+			</div>
+		</div>
+		<div class="flexItem" id='a2'>
+			<div class="flexRow">
+				<span class="item">1</span>
+			</div>
+			<div class="flexRow">
+				<span class="item">4</span>
+			</div>
+			<div class="flexRow">
+				<span class="item">7</span>
+			</div>
+		</div>
+		<div class="flexItem" id='a3'>
+			<div class="flexRow">
+				<span class="item">1</span>
+				<span class="item">2</span>
+			</div>
+			<div class="flexRow">
+				<span class="item">4</span>
+			</div>
+			<div class="flexRow">
+				<span class="item">7</span>
+				<span class="item">3</span>
+			</div>
+		</div>
+		<div class="flexItem" id='a4'>
+			<div class="flexRow">
+				<span class="item">1</span>
+				<span class="item">2</span>
+				<span class="item">1</span>
+				<span class="item">2</span>
+				<span class="item">1</span>
+				<span class="item">2</span>
+<!-- 				<span class="item">1</span>
+				<span class="item">2</span>
+				<span class="item">1</span>
+				<span class="item">2</span>
+				<span class="item">1</span>
+				<span class="item">2</span>
+				<span class="item">1</span>
+				<span class="item">2</span>
+				<span class="item">1</span>
+				<span class="item">2</span>
+				<span class="item">1</span>
+				<span class="item">2</span>
+				<span class="item">1</span>
+				<span class="item">2</span> -->
+			</div>
+		</div>
+		<div class="flexItem" id='a5'></div>
+		<div class="flexItem" id='a6'></div>
+		<div class="flexItem" id='a7'></div>
+		<div class="flexItem" id='a8'></div>
+		<div class="flexItem" id='a9'></div>
+
 	</div>
 </body>
 </html>
