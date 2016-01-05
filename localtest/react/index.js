@@ -73,3 +73,4 @@ ReactDOM.render(
 	<TestWidget zmz={datas}/>,
 	document.getElementById('ccc')
 )
+require('./components/gallery.js').init();

@@ -19,7 +19,7 @@ $RECYCLE.BIN/
 
 #zhangmingzhi edit @ 2016-1-5 all image will not be uploaded.
 image/*
-.JPG
+/image
 
 # =========================
 # Operating System Files
