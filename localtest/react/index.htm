@@ -9,12 +9,46 @@
     	color: red;
     	font-size:24px;
     }
+    .galleryContainer{
+        width: 500px;
+        height: 500px;
+        overflow: hidden;
+        position: relative;
+        border: solid 3px lime;
+    }
+    .galleryStage{
+        position: absolute;
+        width: auto;
+        top: 0px;
+        left: 0px;
+    }
+    .galleryStage img{
+        height: 500px;
+        width: 500px;
+    }
+    .galleryStage li{
+        float: left;
+        height: 500px;
+        width: 500px;
+        z-index: 1;
+        opacity: 0;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+    .galleryStage .imgBig-hide{
+        opacity: 0;
+    }
+    .galleryStage .imgBig-show{
+        opacity: 1;
+    }
     </style>
 </head>
 <body>
 	<div id="aaa"></div>
 	<div id="bbb"></div>
 	<div id="ccc"></div>
+    <div id="ddd"></div>
 	<!-- 
     // <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 	 -->
@@ -24,5 +58,6 @@
         document.getElementById('aaa'));
 	</script>
 	<script type="text/babel" src='index.js'></script>
+    <script type="text/babel" src='components/gallery.js'></script>
 </body>
 </html>

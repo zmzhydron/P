@@ -21,7 +21,7 @@ var datas = {
 }
 var SonWidget = React.createClass({
 	render:function(){
-		return <span className="appendButtons">SonWidget~~~~ and name is {this.props.inner.name}</span>
+		return <div className="appendButtons">SonWidget~~~~ and name is {this.props.inner.name}</div>
 	}
 })
 var LiWidget = React.createClass({
@@ -43,7 +43,6 @@ var InputWidget = React.createClass({
 		this.setState({val:event.target.value});
 	},
 	rechangeState:function(){
-		debugger;
 		this.setState({val:'rtlguioetri90gpwetrjgiophjetri9pgjetriopjug'});	
 	},
 	render:function(){
@@ -73,4 +72,3 @@ ReactDOM.render(
 	<TestWidget zmz={datas}/>,
 	document.getElementById('ccc')
 )
-require('./components/gallery.js').init();
