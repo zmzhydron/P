@@ -45,14 +45,18 @@ var ImgList = React.createClass({
 				className = 'imgBig-hide';
 			}
 			that.state.imgList[i]['opacity'] = opacity;
-			return <li key={i} className = {className} onMouseover = {that.mouseover}>
+			return <li key={i} className = {className} onClick = {that.mouseover} onDbClick = {that.dbcick}>
 				<img src={item.imgsrc} />
 			</li>;
 		})
 		return <ul className="galleryStage">{lis}</ul>;
 	},
 	mouseover:function(){
+		clearInterval(this.timer);
+	},
+	dbcick:function(){
 		alert(1);
+		this.autoRotation();
 	},
 	componentDidMount:function(){
 		this.autoRotation();
