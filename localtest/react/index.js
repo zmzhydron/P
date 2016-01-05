@@ -21,7 +21,12 @@ var datas = {
 }
 var SonWidget = React.createClass({
 	render:function(){
-		return <div className="appendButtons">SonWidget~~~~ and name is {this.props.inner.name}</div>
+		return <div className="appendButtons">SonWidget~~~~ and name is {this.props.inner.name} <div>{this.props.children}</div></div>
+	}
+})
+var child = React.createClass({
+	render:function(){
+		return <span>"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"</span>;
 	}
 })
 var LiWidget = React.createClass({
@@ -62,7 +67,7 @@ var TestWidget = React.createClass({
 				<InputWidget val = {this.props.zmz.name}/>
 				<span className="result">{this.props.zmz.name}</span>
 				<button className="subButtons">click me yeah!!</button>
-				<SonWidget inner={this.props.zmz.innerData}/>
+				<SonWidget inner={this.props.zmz.innerData} children=<child/> />
 				<LiWidget data = {this.props.zmz.ary}/>
 			</div>
 		);

@@ -44,7 +44,7 @@ var ImgList = React.createClass({
 			}else{
 				className = 'imgBig-hide';
 			}
-			that.state.imgList[i]['opacity'] = opacity;
+			item['opacity'] = opacity;
 			return <li key={i} className = {className} onClick = {that.mouseover} onDbClick = {that.dbcick}>
 				<img src={item.imgsrc} />
 			</li>;
@@ -53,6 +53,12 @@ var ImgList = React.createClass({
 	},
 	mouseover:function(){
 		clearInterval(this.timer);
+		fake.map(function(item,i){
+			item.name = 'z@'+i;
+		})
+		var a = fake[0].name;
+		a = 'zmz';
+		console.log(fake);
 	},
 	dbcick:function(){
 		alert(1);
@@ -64,19 +70,13 @@ var ImgList = React.createClass({
 	autoRotation:function(){
 		var that = this;
 		this.timer = setInterval(function(){
-			var before = that.state.imgList[that.currentIndex],
-				className;
-			if(before){
-				that.state.imgList[that.currentIndex].opacity = 'hide';
-			}
+			var	className;
+			that.state.imgList[that.currentIndex].opacity = 'hide';
 			that.currentIndex++;
 			if(that.currentIndex > that.maxLen - 1){
 				that.currentIndex = 0;
 			}
-			var current = that.state.imgList[that.currentIndex];
-			if(current){
-				that.state.imgList[that.currentIndex].opacity = 'show';
-			}
+			that.state.imgList[that.currentIndex].opacity = 'show';
 			that.setState({
 				imgList:that.state.imgList
 			})
