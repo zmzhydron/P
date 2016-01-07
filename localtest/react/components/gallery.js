@@ -98,3 +98,4 @@ var gallery = {
 	}
 }
 gallery.init();
+console.log('init');
