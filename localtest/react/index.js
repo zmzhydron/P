@@ -1,8 +1,3 @@
-ReactDOM.render(
-	<p>fuck you</p>,
-	document.getElementById("bbb")
-);
-
 var datas = {
 	name:"zhangmingzhi",
 	innerData:{
@@ -19,11 +14,6 @@ var datas = {
 		{index:8,name:'boloe'}
 	]
 }
-var SonWidget = React.createClass({
-	render:function(){
-		return <div className="appendButtons">SonWidget~~~~ and name is {this.props.inner.name} <div>{this.props.children}</div></div>
-	}
-})
 var LiWidget = React.createClass({
 	render:function(){
 		var lists = this.props.data.map(function(datas){
@@ -37,12 +27,10 @@ var InputWidget = React.createClass({
 		return {val:this.props.val};
 	},
 	onchanges:function(event){
-		console.log(this);
 		this.setState({val:event.target.value});
 	},
-
 	rechangeState:function(){
-		this.setState({val:'rtlguioetri90gpwetrjgiophjetri9pgjetriopjug'});	
+		this.setState({asdf:'rtlguioetri90gpwetrjgiophjetri9pgjetriopjug'});	
 	},
 	render:function(){
 		return (
@@ -58,8 +46,12 @@ var InputSonWidget = React.createClass({
 	getInitialState:function(){
 		return {val:this.props.val}
 	},
+	change:function(){
+		this.props.onchange();
+	},
 	render:function(){
-		return <input type="text" onChange = {this.props.onchange}  placeholder = "input your throuths here"/>	
+		return <input type="text" onChange = {this.props.onchange} defaultValue={this.props.val} placeholder = "input your throuths here"/>	
+		// return <input type="text" defaultValue={this.props.val}  placeholder = "input your throuths here"/>	
 	}
 })
 var TestWidget = React.createClass({
@@ -67,10 +59,7 @@ var TestWidget = React.createClass({
 		return (
 			<div className="TestWidget">
 				<InputWidget val = {this.props.zmz.name}/>
-				<span className="result">{this.props.zmz.name}</span>
-				<button className="subButtons">click me yeah!!</button>
-				<SonWidget inner={this.props.zmz.innerData} />
-				<LiWidget data = {this.props.zmz.ary}/>
+				<LiWidget data = {this.props.zmz.ary} />
 			</div>
 		);
 	}
