@@ -42,9 +42,7 @@ var InputWidget = React.createClass({
 		return {val:this.props.val};
 	},
 	onchanges:function(event){
-		// this.setState({})
-		console.log(this);
-		console.log(event);
+		console.log(event.target);
 		this.setState({val:event.target.value});
 	},
 	rechangeState:function(){
@@ -53,11 +51,19 @@ var InputWidget = React.createClass({
 	render:function(){
 		return (
 			<div>
-				<input type="text" onChange = {this.onchanges}  placeholder = "input your throuths here" value={this.state.val}/>	
 				<span className="abcd">current Input are : {this.state.val}</span>
+				<InputSonWidget change={this.onchanges} val={this.state.val}/>
 				<button onClick = {this.rechangeState}> hahahahaha </button>
 			</div>
 		)
+	}
+})
+var InputSonWidget = React.createClass({
+	getInitialState:function(){
+		return {val:this.props.val}
+	},
+	render:function(){
+		return <input type="text" onChange = {this.props.change}  placeholder = "input your throuths here"/>	
 	}
 })
 var TestWidget = React.createClass({
