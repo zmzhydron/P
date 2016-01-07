@@ -30,14 +30,13 @@ var fake = [
 var ImgList = React.createClass({
 	getInitialState:function(){
 		this.maxLen = this.props.imgs.length;
-		return {imgList:this.props.imgs}
+		return {imgList:this.props.imgs,currentIndex:this.props.currentIndex || 0}
 	},
-	currentIndex:0,
 	render:function(){
 		var that = this,
 			opacity,
 			className;
-		this.state.imgList[this.currentIndex]['opacity'] = 'show';
+		this.state.imgList[this.state.currentIndex]['opacity'] = 'show';
 		var lis = this.state.imgList.map(function(item,i){
 			if(item['opacity'] === 'show'){
 				className = 'imgBig-show';
@@ -71,16 +70,37 @@ var ImgList = React.createClass({
 		var that = this;
 		this.timer = setInterval(function(){
 			var	className;
-			that.state.imgList[that.currentIndex].opacity = 'hide';
-			that.currentIndex++;
-			if(that.currentIndex > that.maxLen - 1){
-				that.currentIndex = 0;
+			that.state.imgList[that.state.currentIndex].opacity = 'hide';
+			that.state.currentIndex++;
+			if(that.state.currentIndex > that.maxLen - 1){
+				that.state.currentIndex = 0;
 			}
-			that.state.imgList[that.currentIndex].opacity = 'show';
+			that.state.imgList[that.state.currentIndex].opacity = 'show';
 			that.setState({
-				imgList:that.state.imgList
+				imgList:that.state.imgList,
+				
 			})
 		},2000);
+	}
+});
+var GalleryControlComponent = React.createClass({
+	render:function(){
+		return (
+			<div className = "GalleryControlDiv">
+				<input type="text" onChange={this.setIntervalTime} placeholder="enter your pic rotation time" />
+				<button onClick={this.PrePic} className="galleryControlBtn">PRE</button>
+				<button onClick={this.NextPic} className="galleryControlBtn">Next</button>
+			</div>
+		)
+	},
+	setIntervalTime:function(){
+
+	},
+	NextPic:function(){
+
+	},
+	PrePic:function(){
+
 	}
 })
 var GalleryComponent = React.createClass({
@@ -88,6 +108,7 @@ var GalleryComponent = React.createClass({
 		return (
 			<div className="galleryContainer">
 				<ImgList imgs = {this.props.imgList}/>
+				<GalleryControlComponent/>
 			</div>
 		);
 	}
