@@ -17,6 +17,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#image will not be upload to server @2016-1-7'
+image/*
+
 # =========================
 # Operating System Files
 # =========================

@@ -24,11 +24,6 @@ var SonWidget = React.createClass({
 		return <div className="appendButtons">SonWidget~~~~ and name is {this.props.inner.name} <div>{this.props.children}</div></div>
 	}
 })
-var child = React.createClass({
-	render:function(){
-		return <span>"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"</span>;
-	}
-})
 var LiWidget = React.createClass({
 	render:function(){
 		var lists = this.props.data.map(function(datas){
@@ -42,9 +37,10 @@ var InputWidget = React.createClass({
 		return {val:this.props.val};
 	},
 	onchanges:function(event){
-		console.log(event.target);
+		console.log(this);
 		this.setState({val:event.target.value});
 	},
+	
 	rechangeState:function(){
 		this.setState({val:'rtlguioetri90gpwetrjgiophjetri9pgjetriopjug'});	
 	},
@@ -73,7 +69,7 @@ var TestWidget = React.createClass({
 				<InputWidget val = {this.props.zmz.name}/>
 				<span className="result">{this.props.zmz.name}</span>
 				<button className="subButtons">click me yeah!!</button>
-				<SonWidget inner={this.props.zmz.innerData} children=<child/> />
+				<SonWidget inner={this.props.zmz.innerData} />
 				<LiWidget data = {this.props.zmz.ary}/>
 			</div>
 		);

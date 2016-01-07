@@ -27,12 +27,15 @@ var fake = [
 		imgsrc:'../image/9.JPG'
 	}
 ]
+var count = 0;
 var ImgList = React.createClass({
 	getInitialState:function(){
 		this.maxLen = this.props.imgs.length;
 		return {imgList:this.props.imgs,currentIndex:this.props.currentIndex || 0}
 	},
 	render:function(){
+		// console.log(count);
+		count++;
 		var that = this,
 			opacity,
 			className;
