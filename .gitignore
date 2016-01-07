@@ -17,10 +17,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-#image will not be upload @2016-1-7
-/image
-image/*
-
 # =========================
 # Operating System Files
 # =========================
