@@ -30,7 +30,26 @@ var InputWidget = React.createClass({
 		this.setState({val:event.target.value});
 	},
 	rechangeState:function(){
-		this.setState({asdf:'rtlguioetri90gpwetrjgiophjetri9pgjetriopjug'});	
+		this.setState({val:'rtlguioetri90gpwetrjgiophjetri9pgjetriopjug'},function(){
+		});	
+		// this.state.val = '12346';
+	},
+	componentDidMount:function(){
+		var that = this;
+		var doms = ReactDOM.findDOMNode(this);
+		var span = doms.getElementsByTagName('span');
+		var button = doms.getElementsByTagName('button');
+		console.log(span.length);
+		console.log(button);
+		button[0].onclick = function(){
+			var me = this;
+			me.setState({val:'111111111111'});
+			console.log(this);
+		}.bind(this);
+	},
+	shouldComponentUpdate:function(){
+		// return false;
+		return true;
 	},
 	render:function(){
 		return (
