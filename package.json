@@ -1,0 +1,25 @@
+{
+  "name": "p",
+  "version": "1.0.0",
+  "description": "demos and etc..",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack ./server-side/resource/javascript/zmz.js ./server-side/resource/javascript/webpackIndex.js"
+  },
+  "fake": "webpack ./server-side/resource/javascript/zmz.js webpackIndex.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zmzhydron/P.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zmzhydron/P/issues"
+  },
+  "homepage": "https://github.com/zmzhydron/P#readme",
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "style-loader": "^0.13.0"
+  }
+}
