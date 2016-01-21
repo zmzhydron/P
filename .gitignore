@@ -19,7 +19,9 @@ $RECYCLE.BIN/
 
 #image will not be upload to server @2016-1-7'
 image/*
-
+*/node_modules/
+/node_modules/*
+*/image/
 # =========================
 # Operating System Files
 # =========================
