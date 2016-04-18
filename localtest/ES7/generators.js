@@ -5,7 +5,6 @@ function imm(){
     return 10;
 }
 function fuckyou(num){
-    console.log(num,'num');
     return num * 2;
 }
 function *gen(val){
@@ -17,45 +16,71 @@ function *gen(val){
     var c = 10 * (yield fuckyou(b));
     console.log(` step C's value is ${c}`);
 }
-var g = gen(10);
-var a,b,c;
-a = g.next();
-b = g.next(2);
-c = g.next(10);
-g.next(20);
-// g.next();
-// for(var s of g){
-//     console.log(s);
-// }
-console.log(a,b,c);
-
-function *automatic(){
-    while(true){
-        console.log("one");
-        yield;
-        console.log("two");
-        yield;
+// var g = gen(10);
+// var a,b,c;
+// a = g.next();
+// b = g.next(2);
+// c = g.next(10);
+// g.next(20);
+// console.log(a,b,c);
+function writeFile(val){
+    fs.writeFile("D:/generators/1.txt",val,{"encoding":"utf8"},(err) =>{
+        if(err){
+            console.log('error ocurre');
+            return false;
+        }
+        console.log("writefile suceess");
+    })
+}
+//
+function checkDIR(val){
+    var r = fs.exists(val,function(exists){
+        console.log(` exists: ${exists} `);
+        console.log(gen.next(exists),"  ######");
+    });
+}
+function makeDIR(isexists,val){
+    console.log(isexists,val);
+    if(!isexists){
+        fs.mkdir(val,(err) =>{
+            if(err){
+                console.log(` makedir error `);
+                return;
+            }
+            console.log(` make dir success `);
+            console.log(gen.next("2.txt"));
+        });
+    }else{
+        console.log("@@@@@@@@@@@@@@@");
+        setImmediate(function(){
+            gen.next("fuck");
+        })
+        // gen.next("fuck");
+        // try{
+        //
+        // }catch(e){
+        //     console.log('fyuck you');
+        // }
     }
 }
-var tick = automatic();
-var count = 0;
-// console.log(tick.return);
-// for(var s of tick){
-//     count++;
-//     if(count>10){
-//         tick.return(true);
-//     }
-//     console.log(tick[s]);
-// }
-// tick.next();
-// tick.next();
-// tick.next();
-// tick.next();
-// tick.next();
-// tick.next();
-// tick.next();
-// tick.next();
-// tick.next();
-// tick.next();
-// tick.next();
-// tick.next();
+function WriteFile(path,val){
+    console.log("!!!!!!!!!!!!!!!!");
+    fs.writeFile(path,val,(error) =>{
+        if(error){
+            console.log(` WriteFile error `);
+            return false;
+        }
+        console.log(` writefile success `);
+    })
+}
+function *file(val){
+    console.log('read file began~~');
+    var a = yield checkDIR(val);
+    console.log(a,' aaaaaaaaaaaaaaaaaaaaa');
+    var b = yield makeDIR(a,val);
+    console.log(b,' bbbbbbbbbbbbbb');
+    var c = yield WriteFile(val + "/1.txt",b);
+}
+var gen = file("D:/generators");
+var z,x,c,v,d;
+z = gen.next();
