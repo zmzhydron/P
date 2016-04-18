@@ -1,0 +1,36 @@
+@keyframes resizing {
+  0% {
+    width: 300px;
+    height: 300px;
+    transform: rotateX(0deg); }
+  100% {
+    transform: rotateX(240deg);
+    width: 300px;
+    height: 300px; } }
+.stage {
+  perspective: 1500px; }
+  .stage #imgs {
+    background-image: url("./../../image/2.jpg");
+    background-position: -600px 0px;
+    background-repeat: no-repeat;
+    height: 1000px;
+    width: 500px;
+    position: absolute;
+    left: 400px;
+    clip: rect(100px 330px 400px 130px); }
+
+#haha, #hehe {
+  background-color: orange;
+  position: absolute;
+  transform-style: preserve-3d;
+  -webkit-animation: resizing linear 1000ms infinite alternate; }
+  #haha p, #hehe p {
+    color: green; }
+    #haha p span, #hehe p span {
+      font-size: 72px; }
+
+#hehe {
+  right: 300px;
+  background-color: lime; }
+
+/*# sourceMappingURL=1.css.map */

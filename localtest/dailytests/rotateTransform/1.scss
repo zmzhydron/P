@@ -1,0 +1,48 @@
+$bg: orange;
+@keyframes resizing{
+    0%{
+        width: 300px;
+        height: 300px;
+        transform: rotateX(0deg);
+    }
+    100%{
+        transform: rotateX(240deg);
+        width: 300px;
+        height: 300px;
+    }
+}
+@mixin animate($duration: 1000ms) {
+    -webkit-animation:resizing linear $duration infinite alternate;
+}
+.stage{
+    perspective: 1500px;
+    #imgs{
+        background-image: url("./../../image/2.jpg");
+        background-position: -600px 0px;
+        background-repeat: no-repeat;
+        height: 1000px;
+        width: 500px;
+        position: absolute;
+        left: 400px;
+        clip:rect(100px 330px 400px 130px);
+    }
+}
+
+#haha{
+    background-color: $bg;
+    position: absolute;
+    transform-style: preserve-3d;
+    // backface-visibility: hidden;
+    @include animate();
+    p{
+        color: green;
+        span{
+            font-size: 72px;
+        }
+    }
+}
+#hehe{
+    right: 300px;
+    background-color: lime;
+    @extend #haha;
+}
