@@ -54,7 +54,7 @@ function makeDIR(isexists,val){
         console.log("@@@@@@@@@@@@@@@");
         setImmediate(function(){
             gen.next("fuck");
-        })
+        });
         // gen.next("fuck");
         // try{
         //
