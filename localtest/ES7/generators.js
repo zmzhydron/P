@@ -55,12 +55,6 @@ function makeDIR(isexists,val){
         setImmediate(function(){
             gen.next("fuck");
         });
-        // gen.next("fuck");
-        // try{
-        //
-        // }catch(e){
-        //     console.log('fyuck you');
-        // }
     }
 }
 function WriteFile(path,val){
