@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>	
+	<button id="forward">forward</button>
+	<button id="backward">backward</button>
+	<button id="replace">replace</button>
+	<a href="#bbb" id="gogo">baidu</a>
+</body>
+<script type="text/javascript">
+	var forward = document.querySelector("#forward");
+	var backward = document.querySelector("#backward");
+	var replace = document.querySelector("#replace");
+
+	function spushState(){
+		window.history.pushState(null,"","?forward");
+	}
+	function replaceState(){
+
+	}
+	function replaceState(){
+
+	}
+	function getState(){
+		
+		// if(window.history.state === null){
+		// 	window.history.state = [];
+		// }
+		console.log(window.history);
+		return window.history.state;
+	}
+	forward.addEventListener('click',function(){
+		console.log(this);
+		getState();
+		spushState();
+
+	},false);
+	backward.addEventListener('click',function(){
+		console.log(this);
+	},false);
+	replace.addEventListener('click',function(){
+		console.log(this);
+	},false);
+</script>
+</html>
